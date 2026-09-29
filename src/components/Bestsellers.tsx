@@ -48,9 +48,9 @@ export const Bestsellers: React.FC<BestsellersProps> = ({
             >
               <ProductCard
                 product={product}
-                onSelect={() => onSelectProduct(product.id)}
-                onAddToCart={(qty) => onAddToCart(product, qty)}
-                onToggleWishlist={() => onToggleWishlist(product.id)}
+                onSelectProduct={onSelectProduct}
+                onAddToCart={(p) => onAddToCart(p, 1)}
+                onToggleWishlist={onToggleWishlist}
                 isWishlisted={wishlistIds.includes(product.id)}
               />
             </motion.div>

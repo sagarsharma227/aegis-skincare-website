@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronDown, HelpCircle, Sparkles, BookOpen, ShieldCheck, Search, ArrowRight, MessageSquare } from 'lucide-react';
 import { NavView } from '../types';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface FAQItem {
   id: string;
@@ -179,7 +180,13 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header Section */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
+        >
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[10px] font-mono-spec tracking-[0.2em] uppercase text-[#526442] font-bold">
               <HelpCircle className="w-3.5 h-3.5" />
@@ -216,7 +223,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
               </button>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Filter and Search Bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2DDD5]">
@@ -286,9 +293,13 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
               const isOpen = expandedId === faq.id;
 
               return (
-                <div
+                <motion.div
                   key={faq.id}
                   id={`faq-item-${faq.id}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.1 }}
+                  transition={{ duration: 0.7, delay: (index % 5) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   className={`border transition-all duration-200 rounded-[3px] overflow-hidden ${
                     isOpen
                       ? 'border-[#526442] bg-[#FAF8F3] shadow-xs'
@@ -371,7 +382,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                       </div>
                     </div>
                   )}
-                </div>
+                </motion.div>
               );
             })
           )}

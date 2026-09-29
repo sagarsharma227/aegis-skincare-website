@@ -1,6 +1,7 @@
 import React from 'react';
 import { REVIEWS, PRODUCTS } from '../data/products';
 import { Star, ShieldCheck } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface CustomerReviewsProps {
   onSelectProduct?: (productId: string) => void;
@@ -8,9 +9,15 @@ interface CustomerReviewsProps {
 
 export const CustomerReviews: React.FC<CustomerReviewsProps> = ({ onSelectProduct }) => {
   return (
-    <section className="bg-[#F2EFE9] py-20 lg:py-24 border-b border-[#E2DDD5] text-left">
+    <section className="bg-[#F2EFE9] py-20 lg:py-24 border-b border-[#E2DDD5] text-left overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        <div className="max-w-2xl space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl space-y-3"
+        >
           <div className="inline-flex items-center gap-2 text-[10px] font-mono-spec tracking-[0.2em] uppercase text-[#526442] font-bold">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>COMMUNITY FEEDBACK</span>
@@ -21,11 +28,11 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({ onSelectProduc
           <p className="text-xs sm:text-sm text-[#5E645F] leading-relaxed">
             Real feedback from men using the 3-minute protocol across varying climates and skin types.
           </p>
-        </div>
+        </motion.div>
 
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {REVIEWS.map((review) => {
+          {REVIEWS.map((review, idx) => {
             const matchedProduct = PRODUCTS.find(
               (p) =>
                 p.name.toLowerCase() === review.productName.toLowerCase() ||
@@ -34,9 +41,14 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({ onSelectProduc
             );
 
             return (
-              <div
+              <motion.div
                 key={review.id}
-                className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between space-y-4 shadow-xs hover:border-[#526442] transition-colors"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ scale: 1.02 }}
+                className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between space-y-4 shadow-xs hover:border-[#526442] hover:shadow-md transition-colors"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -81,7 +93,7 @@ export const CustomerReviews: React.FC<CustomerReviewsProps> = ({ onSelectProduc
                     )}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

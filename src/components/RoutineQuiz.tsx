@@ -98,7 +98,13 @@ export const RoutineQuiz: React.FC<RoutineQuizProps> = ({
     >
       <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-8">
         {/* Header Title */}
-        <div className="text-center space-y-3">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center space-y-3"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] text-[#526442] text-[10px] font-mono-spec tracking-[0.2em] uppercase font-semibold">
             <AegisMonogram size={14} color="#526442" />
             <span>AEGIS DIAGNOSTIC MATRIX</span>
@@ -109,7 +115,7 @@ export const RoutineQuiz: React.FC<RoutineQuizProps> = ({
           <p className="text-xs sm:text-sm text-[#5E645F] max-w-lg mx-auto leading-relaxed">
             Answer 6 quick questions about your skin, shaving habits, and daily sun exposure to receive a custom 3-minute regimen.
           </p>
-        </div>
+        </motion.div>
 
         {/* Calculating State */}
         {isCalculating && (

@@ -54,6 +54,8 @@ export const ShopByConcern: React.FC<ShopByConcernProps> = ({
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: index * 0.03 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => {
                 if (onSelectConcern) {
                   onSelectConcern(isActive ? 'all' : concern.id);

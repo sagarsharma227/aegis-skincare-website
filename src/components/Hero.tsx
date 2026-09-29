@@ -50,9 +50,15 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
 
             {/* Main Headline */}
             <div className="space-y-4">
-              <h1 className="font-serif-editorial text-4xl sm:text-5xl lg:text-6xl text-[#1A1C1B] font-normal leading-[1.08] tracking-tight">
-                Your skin isn't complicated.<br />Your skincare shouldn't be.
-              </h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="font-serif-editorial text-4xl sm:text-5xl lg:text-6xl text-[#1A1C1B] font-normal leading-[1.08] tracking-tight"
+              >
+                Your skin isn't complicated. <br className="hidden sm:inline" />
+                <span className="italic text-[#526442]">Your skincare shouldn't be.</span>
+              </motion.h1>
               <p className="font-sans text-base sm:text-lg text-[#5E645F] max-w-2xl font-light leading-relaxed">
                 Science-backed formulas designed around your skin, your concerns, and your everyday routine.
               </p>
@@ -60,7 +66,11 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
 
             {/* Core Proof Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <div className="p-3.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors"
+              >
                 <span className="text-[10px] font-mono-spec text-[#526442] uppercase tracking-wider block font-bold">
                   ABSORPTION
                 </span>
@@ -70,9 +80,13 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                 <p className="text-[11px] text-[#5E645F] leading-tight">
                   No greasy film or heavy beard residue.
                 </p>
-              </div>
+              </motion.div>
 
-              <div className="p-3.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors"
+              >
                 <span className="text-[10px] font-mono-spec text-[#526442] uppercase tracking-wider block font-bold">
                   TRANSPARENCY
                 </span>
@@ -82,7 +96,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                 <p className="text-[11px] text-[#5E645F] leading-tight">
                   Exact percentage disclosures on every carton.
                 </p>
-              </div>
+              </motion.div>
             </div>
 
             {/* Primary Calls to Action */}
@@ -126,7 +140,11 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
           >
             <div className="relative group">
               {/* Architectural Surface Frame */}
-              <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-7 space-y-4 shadow-sm">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-7 space-y-4 shadow-sm hover:shadow-md hover:border-[#526442]/60 transition-colors"
+              >
                 
                 {/* Header with Star Rating and Inventory Context Badge */}
                 <div className="flex items-center justify-between text-[11px] font-mono-spec pb-3 border-b border-[#E2DDD5]">
@@ -233,7 +251,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                     )}
                   </motion.button>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Floating Architectural Badge */}
               <motion.div 

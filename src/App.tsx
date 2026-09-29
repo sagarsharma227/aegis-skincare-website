@@ -10,6 +10,7 @@ import { ProductCard } from './components/ProductCard';
 import { ClinicalComparison } from './components/ClinicalComparison';
 import { CustomerReviews } from './components/CustomerReviews';
 import { FrequentlyAskedQuestions } from './components/FrequentlyAskedQuestions';
+import { NewsletterSection } from './components/NewsletterSection';
 import { RoutineQuiz } from './components/RoutineQuiz';
 import { ShopView } from './components/ShopView';
 import { RoutinesView } from './components/RoutinesView';
@@ -36,28 +37,6 @@ export function App() {
     damping: 30,
     restDelta: 0.001
   });
-
-  const [copiedRoutine, setCopiedRoutine] = useState<'am' | 'pm' | null>(null);
-
-  const copyRoutine = (type: 'am' | 'pm') => {
-    let text = '';
-    if (type === 'am') {
-      text = `AEGIS MEN — MORNING PROTOCOL (AM) [~90 SECONDS]
-01 / CLEANSE (30s): AEGIS WASH — Apple Amino Acids lift overnight oils at pH 5.5 without stripping.
-02 / CORRECT (30s): AEGIS CLEAR — 2% BHA + 5% Niacinamide unclogs pores and balances midday shine.
-03 / DEFEND (30s): AEGIS SHIELD SPF 50 — 100% invisible photoprotection even in stubble. Zero white cast.`;
-    } else {
-      text = `AEGIS MEN — EVENING PROTOCOL (PM) [~60 SECONDS]
-01 / PURIFY (30s): AEGIS WASH — Wash away daytime city pollution, sunscreen, and oxidized sebum.
-02 / REPAIR (30s): AEGIS REPAIR / MOISTURIZER — Restores skin barrier lipids and accelerates post-shave overnight recovery.`;
-    }
-
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedRoutine(type);
-      showToast(`${type === 'am' ? 'Morning' : 'Evening'} protocol copied to clipboard!`);
-      setTimeout(() => setCopiedRoutine(null), 2500);
-    });
-  };
 
   // Sync memory images to github (runs once on load)
   useEffect(() => {
@@ -366,117 +345,7 @@ export function App() {
               setCurrentView={changeView}
             />
 
-            {/* 3-Minute Routine Guide Section */}
-            <section className="py-20 lg:py-24 border-b border-[#E2DDD5] bg-[#F2EFE9] text-left">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-                <div className="max-w-3xl space-y-3">
-                  <div className="inline-flex items-center gap-2 text-[10px] font-mono-spec tracking-[0.2em] uppercase text-[#526442] font-bold">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>THE 3-MINUTE COMMITMENT</span>
-                  </div>
-                  <h2 className="text-3xl sm:text-4xl font-serif-editorial font-normal text-[#1A1C1B]">
-                    Your routine, simplified.
-                  </h2>
-                  <p className="text-xs sm:text-sm text-[#5E645F] leading-relaxed">
-                    Designed around biological necessity rather than cosmetic excess. Complete both morning and evening steps in under 3 minutes total.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {/* AM */}
-                  <div className="p-6 sm:p-8 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] space-y-4 shadow-xs">
-                    <div className="flex items-center justify-between pb-3 border-b border-[#E2DDD5]">
-                      <div className="flex items-center gap-2">
-                        <Sun className="w-4 h-4 text-[#526442]" />
-                        <h3 className="font-serif-editorial text-lg text-[#1A1C1B]">
-                          Morning Protocol (AM)
-                        </h3>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-mono-spec text-[#5E645F]">~90s</span>
-                        <button
-                          id="home-copy-am-routine-btn"
-                          onClick={() => copyRoutine('am')}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono-spec rounded-[3px] border border-[#E2DDD5] bg-[#F2EFE9] hover:bg-[#FAF9F7] text-[#1A1C1B] hover:border-[#526442] hover:text-[#526442] transition-all cursor-pointer select-none"
-                          title="Copy Morning Protocol to clipboard"
-                        >
-                          {copiedRoutine === 'am' ? (
-                            <>
-                              <Check className="w-3 h-3 text-[#526442]" />
-                              <span className="text-[#526442] font-bold">COPIED</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3 text-[#5E645F]" />
-                              <span>COPY ROUTINE</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-xs">
-                      <div className="p-3 bg-[#F2EFE9] rounded-[2px] space-y-0.5">
-                        <strong className="text-[#1A1C1B] block font-mono-spec text-[11px]">01 / CLEANSE (30s)</strong>
-                        <p className="text-[#5E645F]">AEGIS WASH with Apple Amino Acids lifts overnight oils at pH 5.5.</p>
-                      </div>
-                      <div className="p-3 bg-[#F2EFE9] rounded-[2px] space-y-0.5">
-                        <strong className="text-[#1A1C1B] block font-mono-spec text-[11px]">02 / CORRECT (30s)</strong>
-                        <p className="text-[#5E645F]">AEGIS CLEAR 2% BHA + 5% Niacinamide unclogs pores and balances shine.</p>
-                      </div>
-                      <div className="p-3 bg-[#F2EFE9] rounded-[2px] space-y-0.5">
-                        <strong className="text-[#1A1C1B] block font-mono-spec text-[11px]">03 / DEFEND (30s)</strong>
-                        <p className="text-[#5E645F]">AEGIS SHIELD SPF 50 provides 100% invisible photoprotection in stubble.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* PM */}
-                  <div className="p-6 sm:p-8 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] space-y-4 shadow-xs">
-                    <div className="flex items-center justify-between pb-3 border-b border-[#E2DDD5]">
-                      <div className="flex items-center gap-2">
-                        <Moon className="w-4 h-4 text-[#1A1C1B]" />
-                        <h3 className="font-serif-editorial text-lg text-[#1A1C1B]">
-                          Evening Protocol (PM)
-                        </h3>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-mono-spec text-[#5E645F]">~60s</span>
-                        <button
-                          id="home-copy-pm-routine-btn"
-                          onClick={() => copyRoutine('pm')}
-                          className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-mono-spec rounded-[3px] border border-[#E2DDD5] bg-[#F2EFE9] hover:bg-[#FAF9F7] text-[#1A1C1B] hover:border-[#526442] hover:text-[#526442] transition-all cursor-pointer select-none"
-                          title="Copy Evening Protocol to clipboard"
-                        >
-                          {copiedRoutine === 'pm' ? (
-                            <>
-                              <Check className="w-3 h-3 text-[#526442]" />
-                              <span className="text-[#526442] font-bold">COPIED</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-3 h-3 text-[#5E645F]" />
-                              <span>COPY ROUTINE</span>
-                            </>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="space-y-3 text-xs">
-                      <div className="p-3 bg-[#F2EFE9] rounded-[2px] space-y-0.5">
-                        <strong className="text-[#1A1C1B] block font-mono-spec text-[11px]">01 / PURIFY (30s)</strong>
-                        <p className="text-[#5E645F]">Wash away daytime city pollution, sunscreen, and oxidized sebum.</p>
-                      </div>
-                      <div className="p-3 bg-[#F2EFE9] rounded-[2px] space-y-0.5">
-                        <strong className="text-[#1A1C1B] block font-mono-spec text-[11px]">02 / REPAIR (30s)</strong>
-                        <p className="text-[#5E645F]">Restores skin barrier lipids and accelerates post-shave overnight recovery.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Diagnostic Skin Quiz Section placed just below 3-minute commitment */}
+            {/* Diagnostic Skin Quiz Section */}
             <RoutineQuiz
               onAddToCart={handleAddToCart}
               onAddMultipleToCart={handleAddMultipleToCart}
@@ -493,6 +362,9 @@ export function App() {
 
             {/* FAQ: Routine Sequencing & Active Ingredients */}
             <FrequentlyAskedQuestions setCurrentView={changeView} />
+
+            {/* Discreet, stylish newsletter subscription section above footer */}
+            <NewsletterSection onSuccessToast={showToast} />
           </div>
         )}
 

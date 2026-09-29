@@ -41,9 +41,11 @@ const SynchronizedStepCard: React.FC<{
   const { image } = useImageStore(item.product.id, item.product.image);
 
   return (
-    <div
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       onClick={onClick}
-      className="group/card cursor-pointer bg-[#F2EFE9]/50 hover:bg-[#F2EFE9] border border-[#E2DDD5] hover:border-[#526442] rounded-[3px] p-3 transition-all duration-300 flex flex-col justify-between text-left"
+      className="group/card cursor-pointer bg-[#F2EFE9]/50 hover:bg-[#F2EFE9] border border-[#E2DDD5] hover:border-[#526442] rounded-[3px] p-3 transition-colors duration-300 flex flex-col justify-between text-left shadow-xs hover:shadow-md"
     >
       <div className="aspect-square bg-[#151714] rounded-[2px] overflow-hidden relative mb-2.5">
         <img
@@ -68,7 +70,7 @@ const SynchronizedStepCard: React.FC<{
           {item.benefit}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -80,9 +82,11 @@ const SynchronizedSingleStepImage: React.FC<{
   const { image } = useImageStore(product.id, product.image);
 
   return (
-    <div
+    <motion.div
       onClick={() => onSelectProduct(product.id)}
-      className="aspect-square sm:aspect-4/5 bg-[#151714] rounded-[3px] overflow-hidden relative cursor-pointer group/spotlight border border-[#E2DDD5]"
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="aspect-square sm:aspect-4/5 bg-[#151714] rounded-[3px] overflow-hidden relative cursor-pointer group/spotlight border border-[#E2DDD5] shadow-xs hover:shadow-md transition-shadow"
     >
       <img
         src={image}
@@ -99,7 +103,7 @@ const SynchronizedSingleStepImage: React.FC<{
           {product.name}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -184,10 +188,10 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-[#E2DDD5]">
           <div className="space-y-4 max-w-3xl">
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="inline-flex items-center gap-2.5 px-3 py-1.5 bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] text-[#526442] text-[10px] font-mono-spec tracking-[0.2em] uppercase font-bold"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#526442]" />
@@ -195,20 +199,20 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
             </motion.div>
 
             <motion.h2
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="text-3xl sm:text-5xl lg:text-6xl font-serif-editorial font-normal text-[#1A1C1B] leading-[1.1] tracking-tight"
             >
               The Starter System.
             </motion.h2>
 
             <motion.p
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm sm:text-base text-[#5E645F] leading-relaxed max-w-2xl"
             >
               Three synergistic formulations. Under 3 minutes daily. Zero confusion. Engineered as the
@@ -225,7 +229,11 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-wrap lg:flex-col items-start lg:items-end gap-3 text-[11px] font-mono-spec"
           >
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] text-[#1A1C1B]">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="flex items-center gap-2 px-3 py-1.5 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] text-[#1A1C1B] shadow-xs cursor-default"
+            >
               <div className="flex text-[#526442]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-3 h-3 fill-current" />
@@ -233,7 +241,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
               </div>
               <span className="font-semibold">5.0 / 5.0</span>
               <span className="text-[#7A8279]">(528 reviews)</span>
-            </div>
+            </motion.div>
             <div className="flex items-center gap-2 text-[#526442] font-bold uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-[#526442] animate-pulse" />
               <span>IN STOCK · 60-DAY SUPPLY · SAVE ₹298</span>
@@ -306,9 +314,11 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                     className="space-y-6 pt-4"
                   >
                     {/* Primary Showcase: The Starter System Product Image Shared with Shop Section */}
-                    <div
+                    <motion.div
                       onClick={() => onSelectProduct('aegis-starter-bundle')}
-                      className="relative aspect-16/9 sm:aspect-21/9 bg-[#151714] rounded-[3px] overflow-hidden border border-[#E2DDD5] group/bundle cursor-pointer"
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative aspect-16/9 sm:aspect-21/9 bg-[#151714] rounded-[3px] overflow-hidden border border-[#E2DDD5] group/bundle cursor-pointer shadow-xs hover:shadow-md transition-shadow"
                     >
                       <img
                         src={bundleImg}
@@ -333,7 +343,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                           Click To View Dossier · ₹1,899 (Save ₹298)
                         </span>
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Synergistic 3 Formulas Lineup (Synced with Live Images) */}
                     <div className="space-y-2">
@@ -353,7 +363,11 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                     </div>
 
                     {/* Architectural Trio Highlight Strip */}
-                    <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs">
+                    <motion.div
+                      whileHover={{ scale: 1.01 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs hover:border-[#526442]/60 transition-colors"
+                    >
                       <div className="space-y-1">
                         <strong className="text-[#1A1C1B] font-mono-spec text-[11px] uppercase tracking-wider block">
                           THE COMPLETE 3-STEP TRIAD
@@ -371,7 +385,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                           <ArrowRight className="w-3.5 h-3.5" />
                         </button>
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -442,45 +456,65 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
 
             {/* 4 Clinical Pillars Micro-Bar */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
-              <div className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors cursor-default"
+              >
                 <span className="text-[18px] sm:text-[22px] font-mono-spec font-bold text-[#1A1C1B] block leading-none">
                   +94%
                 </span>
                 <span className="text-[10px] font-mono-spec text-[#5E645F] uppercase block">
                   Moisture Retention
                 </span>
-              </div>
-              <div className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors cursor-default"
+              >
                 <span className="text-[18px] sm:text-[22px] font-mono-spec font-bold text-[#1A1C1B] block leading-none">
                   100%
                 </span>
                 <span className="text-[10px] font-mono-spec text-[#5E645F] uppercase block">
                   Zero Cast in Stubble
                 </span>
-              </div>
-              <div className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors cursor-default"
+              >
                 <span className="text-[18px] sm:text-[22px] font-mono-spec font-bold text-[#1A1C1B] block leading-none">
                   pH 5.5
                 </span>
                 <span className="text-[10px] font-mono-spec text-[#5E645F] uppercase block">
                   Acid Mantle Matched
                 </span>
-              </div>
-              <div className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1">
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="p-3 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] space-y-1 hover:border-[#526442] hover:shadow-xs transition-colors cursor-default"
+              >
                 <span className="text-[18px] sm:text-[22px] font-mono-spec font-bold text-[#1A1C1B] block leading-none">
                   &lt; 3 Min
                 </span>
                 <span className="text-[10px] font-mono-spec text-[#5E645F] uppercase block">
                   Daily Time Needed
                 </span>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Right Column: Routine Timeline + Value Calculator + Direct Purchase (5 cols) */}
           <div className="lg:col-span-5 space-y-6 text-left">
             {/* AM / PM Interactive Protocol Preview */}
-            <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-7 space-y-6 shadow-xs">
+            <motion.div
+              whileHover={{ scale: 1.01 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-7 space-y-6 shadow-xs hover:border-[#526442]/60 hover:shadow-md transition-all"
+            >
               <div className="flex items-center justify-between pb-3 border-b border-[#E2DDD5]">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-[#526442]" />
@@ -529,7 +563,11 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                     transition={{ duration: 0.3 }}
                     className="space-y-3 text-xs"
                   >
-                    <div className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5 hover:shadow-xs transition-shadow cursor-default"
+                    >
                       <div className="flex items-center justify-between text-[10px] font-mono-spec">
                         <strong className="text-[#1A1C1B] uppercase font-bold">
                           01 / CLEANSE (30s) · AEGIS WASH
@@ -539,9 +577,13 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       <p className="text-[#5E645F]">
                         Lather 1 pump with warm water to dissolve overnight oil without drying the skin.
                       </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5 hover:shadow-xs transition-shadow cursor-default"
+                    >
                       <div className="flex items-center justify-between text-[10px] font-mono-spec">
                         <strong className="text-[#1A1C1B] uppercase font-bold">
                           02 / REPAIR (30s) · AEGIS HYDRA
@@ -551,9 +593,13 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       <p className="text-[#5E645F]">
                         Smooth 1 pump over face & neck to rebuild moisture barrier and balance mid-day shine.
                       </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#526442] space-y-0.5 hover:shadow-xs transition-shadow cursor-default"
+                    >
                       <div className="flex items-center justify-between text-[10px] font-mono-spec">
                         <strong className="text-[#1A1C1B] uppercase font-bold">
                           03 / DEFEND (30s) · AEGIS SHIELD SPF 50
@@ -563,7 +609,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       <p className="text-[#5E645F]">
                         Apply 2 fingers over face and stubble. Zero chalky cast, zero beard residue.
                       </p>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -574,7 +620,11 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                     transition={{ duration: 0.3 }}
                     className="space-y-3 text-xs"
                   >
-                    <div className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#1A1C1B] space-y-0.5">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#1A1C1B] space-y-0.5 hover:shadow-xs transition-shadow cursor-default"
+                    >
                       <div className="flex items-center justify-between text-[10px] font-mono-spec">
                         <strong className="text-[#1A1C1B] uppercase font-bold">
                           01 / PURIFY (30s) · AEGIS WASH
@@ -584,9 +634,13 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       <p className="text-[#5E645F]">
                         Dissolves city grime, sweat, and daytime sunscreen completely clean.
                       </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#1A1C1B] space-y-0.5">
+                    <motion.div
+                      whileHover={{ scale: 1.02 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="p-3 bg-[#F2EFE9] rounded-[2px] border-l-2 border-[#1A1C1B] space-y-0.5 hover:shadow-xs transition-shadow cursor-default"
+                    >
                       <div className="flex items-center justify-between text-[10px] font-mono-spec">
                         <strong className="text-[#1A1C1B] uppercase font-bold">
                           02 / REPAIR (30s) · AEGIS HYDRA
@@ -596,7 +650,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       <p className="text-[#5E645F]">
                         Apply 1-2 pumps to calm shave friction, rehydrate stratum corneum, and rebuild barrier.
                       </p>
-                    </div>
+                    </motion.div>
 
                     <div className="p-3 bg-[#F2EFE9]/60 rounded-[2px] border border-dashed border-[#E2DDD5] text-[#5E645F] text-[11px] font-mono-spec flex items-center gap-2">
                       <CheckCircle2 className="w-3.5 h-3.5 text-[#526442] shrink-0" />
@@ -682,7 +736,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

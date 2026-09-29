@@ -44,10 +44,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <motion.div
       id={`product-card-${product.id}`}
-      whileHover={{ y: -3 }}
-      transition={{ duration: 0.2 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
       onClick={() => onSelectProduct(product.id)}
-      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#526442] hover:shadow-md cursor-pointer select-none"
+      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-colors duration-300 hover:border-[#526442] hover:shadow-lg cursor-pointer select-none"
     >
       {/* Top Meta, Inventory Badge & Wishlist */}
       <div className="space-y-4">

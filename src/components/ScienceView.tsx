@@ -2,6 +2,7 @@ import React from 'react';
 import { NavView } from '../types';
 import { Shield, Droplets, Scissors, Sun, Sparkles, ArrowRight, Dna, CheckCircle2 } from 'lucide-react';
 import { AegisMonogram } from './AegisMonogram';
+import { motion } from 'motion/react';
 
 interface ScienceViewProps {
   setCurrentView: (view: NavView) => void;
@@ -9,10 +10,15 @@ interface ScienceViewProps {
 
 export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
   return (
-    <div className="bg-[#F2EFE9] min-h-screen py-12 lg:py-20 text-left">
+    <div className="bg-[#F2EFE9] min-h-screen py-12 lg:py-20 text-left overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Header Title */}
-        <div className="max-w-3xl space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl space-y-4"
+        >
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] text-[#526442] text-[10px] font-mono-spec tracking-[0.2em] uppercase">
             <AegisMonogram size={14} color="#526442" />
             <span>AEGIS RESEARCH ARCHIVE</span>
@@ -24,7 +30,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
           <p className="text-sm sm:text-base text-[#5E645F] leading-relaxed">
             Skincare should be understandable. Men’s skin has distinctive physiological factors—higher sebum secretion, regular razor friction, and daily sun exposure. Here is why each AEGIS formula exists.
           </p>
-        </div>
+        </motion.div>
 
         
         {/* Core Clinical Pathways */}
@@ -35,7 +41,14 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Pathway 1: Oil Control */}
-            <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group hover:border-[#526442] hover:shadow-md transition-colors"
+            >
               <div className="flex items-center gap-3">
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
@@ -63,10 +76,17 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   ROUTINE: AM / PM
                 </span>
               </div>
-            </div>
+            </motion.div>
 
             {/* Pathway 2: Barrier Repair */}
-            <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group hover:border-[#526442] hover:shadow-md transition-colors"
+            >
               <div className="flex items-center gap-3">
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
@@ -94,10 +114,17 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   ROUTINE: PM
                 </span>
               </div>
-            </div>
+            </motion.div>
             
              {/* Pathway 3: Razor Burn */}
-            <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group hover:border-[#526442] hover:shadow-md transition-colors"
+            >
               <div className="flex items-center gap-3">
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
@@ -125,10 +152,17 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   ROUTINE: POST-SHAVE
                 </span>
               </div>
-            </div>
+            </motion.div>
             
              {/* Pathway 4: UV Damage */}
-            <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ scale: 1.02 }}
+              className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 shadow-xs flex flex-col gap-4 group hover:border-[#526442] hover:shadow-md transition-colors"
+            >
               <div className="flex items-center gap-3">
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
@@ -156,7 +190,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   ROUTINE: AM
                 </span>
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>

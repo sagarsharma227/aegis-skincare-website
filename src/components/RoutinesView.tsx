@@ -5,6 +5,7 @@ import { RoutineBuilder } from './RoutineBuilder';
 import { Clock, Sun, Moon, ArrowRight, CheckCircle2, Sparkles, Layers, Copy, Check } from 'lucide-react';
 import { AegisMonogram } from './AegisMonogram';
 import { motion } from 'motion/react';
+import { CleanseIcon, CorrectIcon, DefendIcon, PurifyIcon, RepairIcon } from './RoutineStepIcons';
 
 interface RoutinesViewProps {
   setCurrentView: (view: NavView) => void;
@@ -136,7 +137,14 @@ EVENING PROTOCOL (PM) [~60s]:
         {/* 2-Column AM / PM Protocol */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* AM Routine */}
-          <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-8 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-8 space-y-6 shadow-xs hover:shadow-lg transition-colors hover:border-[#526442]"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-[#E2DDD5]">
               <div className="flex items-center gap-2">
                 <Sun className="w-4 h-4 text-[#526442]" />
@@ -168,47 +176,81 @@ EVENING PROTOCOL (PM) [~60s]:
             </div>
 
             <div className="space-y-4">
-              {/* Step 1 */}
-              <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1">
-                <div className="flex justify-between text-[11px] font-mono-spec">
-                  <span className="font-bold text-[#526442] uppercase">01 / CLEANSE (30s)</span>
+              {/* Step 1: Cleanse */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1.5 hover:border-[#526442]/60 transition-colors"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono-spec">
+                  <div className="flex items-center gap-2">
+                    <CleanseIcon size={16} color="#526442" />
+                    <span className="font-bold text-[#526442] uppercase">01 / CLEANSE (30s)</span>
+                  </div>
                   <span className="text-[#1A1C1B] font-semibold">AEGIS WASH</span>
                 </div>
-                <p className="text-xs text-[#5E645F]">
+                <p className="text-xs text-[#5E645F] pl-6">
                   Lather 1 pump with water. Gently washes away sleep perspiration and sebum while maintaining your skin mantle at pH 5.5.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Step 2 */}
-              <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1">
-                <div className="flex justify-between text-[11px] font-mono-spec">
-                  <span className="font-bold text-[#526442] uppercase">02 / CORRECT (30s)</span>
+              {/* Step 2: Correct */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1.5 hover:border-[#526442]/60 transition-colors"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono-spec">
+                  <div className="flex items-center gap-2">
+                    <CorrectIcon size={16} color="#526442" />
+                    <span className="font-bold text-[#526442] uppercase">02 / CORRECT (30s)</span>
+                  </div>
                   <span className="text-[#1A1C1B] font-semibold">
                     {profileType === 'sensitive' ? 'AEGIS REPAIR' : 'AEGIS CLEAR SERUM'}
                   </span>
                 </div>
-                <p className="text-xs text-[#5E645F]">
+                <p className="text-xs text-[#5E645F] pl-6">
                   {profileType === 'sensitive'
                     ? 'Apply 1 pump of AEGIS REPAIR barrier serum to calm shaving irritation and rebuild lost lipids.'
                     : 'Apply 2-3 drops of 2% BHA + 5% Niacinamide across forehead and nose to control shine and keep pores clear.'}
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Step 3 */}
-              <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1">
-                <div className="flex justify-between text-[11px] font-mono-spec">
-                  <span className="font-bold text-[#526442] uppercase">03 / DEFEND (30s)</span>
+              {/* Step 3: Defend */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1.5 hover:border-[#526442]/60 transition-colors"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono-spec">
+                  <div className="flex items-center gap-2">
+                    <DefendIcon size={16} color="#526442" />
+                    <span className="font-bold text-[#526442] uppercase">03 / DEFEND (30s)</span>
+                  </div>
                   <span className="text-[#1A1C1B] font-semibold">AEGIS SHIELD SPF 50</span>
                 </div>
-                <p className="text-xs text-[#5E645F]">
+                <p className="text-xs text-[#5E645F] pl-6">
                   Apply 2 finger lengths over face and neck. Dries down 100% invisible with zero white cast in facial hair or stubble.
                 </p>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* PM Routine */}
-          <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-8 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.15 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 sm:p-8 space-y-6 shadow-xs hover:shadow-lg transition-colors hover:border-[#526442]"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-[#E2DDD5]">
               <div className="flex items-center gap-2">
                 <Moon className="w-4 h-4 text-[#1A1C1B]" />
@@ -240,35 +282,59 @@ EVENING PROTOCOL (PM) [~60s]:
             </div>
 
             <div className="space-y-4">
-              {/* Step 1 */}
-              <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1">
-                <div className="flex justify-between text-[11px] font-mono-spec">
-                  <span className="font-bold text-[#526442] uppercase">01 / PURIFY (30s)</span>
+              {/* Step 1: Purify */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1.5 hover:border-[#526442]/60 transition-colors"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono-spec">
+                  <div className="flex items-center gap-2">
+                    <PurifyIcon size={16} color="#526442" />
+                    <span className="font-bold text-[#526442] uppercase">01 / PURIFY (30s)</span>
+                  </div>
                   <span className="text-[#1A1C1B] font-semibold">AEGIS WASH</span>
                 </div>
-                <p className="text-xs text-[#5E645F]">
+                <p className="text-xs text-[#5E645F] pl-6">
                   Dissolves daytime particulate pollution, sunscreen, and oxidized oils before rest.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Step 2 */}
-              <div className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1">
-                <div className="flex justify-between text-[11px] font-mono-spec">
-                  <span className="font-bold text-[#526442] uppercase">02 / TREAT & REBUILD (30s)</span>
+              {/* Step 2: Repair / Rebuild */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                className="p-4 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-1.5 hover:border-[#526442]/60 transition-colors"
+              >
+                <div className="flex items-center justify-between text-[11px] font-mono-spec">
+                  <div className="flex items-center gap-2">
+                    <RepairIcon size={16} color="#526442" />
+                    <span className="font-bold text-[#526442] uppercase">02 / TREAT & REBUILD (30s)</span>
+                  </div>
                   <span className="text-[#1A1C1B] font-semibold">
                     {profileType === 'sensitive' ? 'AEGIS RECOVER CREAM' : 'AEGIS CLEAR + HYDRA'}
                   </span>
                 </div>
-                <p className="text-xs text-[#5E645F]">
+                <p className="text-xs text-[#5E645F] pl-6">
                   {profileType === 'sensitive'
                     ? 'Dime-sized amount of overnight recovery cream to accelerate barrier recovery from daily razor passes.'
                     : 'Apply 3 drops of BHA serum to clear pore canals, followed by 1 pump of AEGIS HYDRA to replenish hydration.'}
                 </p>
-              </div>
+              </motion.div>
             </div>
 
             {/* Quick Kit Link */}
-            <div className="p-5 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-3 mt-4">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              className="p-5 bg-[#F2EFE9] rounded-[3px] border border-[#E2DDD5] space-y-3 mt-4"
+            >
               <div className="flex justify-between items-center text-xs font-mono-spec">
                 <span className="font-bold text-[#1A1C1B]">{starterKit.name}</span>
                 <span className="text-[#526442] font-bold">₹{starterKit.price.toLocaleString('en-IN')}</span>
@@ -282,8 +348,8 @@ EVENING PROTOCOL (PM) [~60s]:
               >
                 Add Starter System to Bag
               </button>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Embedded Interactive Routine Builder */}
