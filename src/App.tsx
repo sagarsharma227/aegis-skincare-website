@@ -18,7 +18,6 @@ import { IngredientsView } from './components/IngredientsView';
 import { ScienceView } from './components/ScienceView';
 import { JournalView } from './components/JournalView';
 import { AboutView } from './components/AboutView';
-import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
 import { SearchModal } from './components/SearchModal';
@@ -26,10 +25,14 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
 import { AegisAIChatbot } from './components/AegisAIChatbot';
+import { useAssetPreload } from './hooks/useAssetPreload';
 import { Sparkles, ArrowRight, Sun, Moon, Clock, Copy, Check } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'motion/react';
 
 export function App() {
+  // Preload critical hero assets and product imagery for seamless flicker-free navigation
+  useAssetPreload();
+
   // Scroll progress for home page
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -331,27 +334,32 @@ export function App() {
             {/* Website Intro Section */}
             <Hero
               setCurrentView={changeView}
-              onSelectProduct={handleSelectProduct}
               onAddToCart={handleAddToCart}
             />
 
             {/* Deep Charcoal Brand Philosophy */}
             <BrandPhilosophy />
+
+            {/* Decorative Architectural Transition Separator */}
+            <div className="relative py-4 bg-[#1A1C1B] overflow-hidden select-none" aria-hidden="true">
+              <div className="max-w-7xl mx-auto px-6 sm:px-8">
+                <div className="relative flex items-center justify-center">
+                  <div className="w-full h-px bg-gradient-to-r from-transparent via-[#526442]/60 to-transparent" />
+                  <div className="absolute px-4 bg-[#1A1C1B] flex items-center gap-2.5 text-[9.5px] font-mono-spec tracking-[0.28em] text-[#8C9B86] uppercase">
+                    <span className="w-1 h-1 rounded-full bg-[#526442] animate-pulse" />
+                    <span>FOUNDATIONAL DAILY PROTOCOL</span>
+                    <span className="w-1 h-1 rounded-full bg-[#526442] animate-pulse" />
+                  </div>
+                </div>
+              </div>
+              {/* Soft ambient transition into the Starter System warm stone arena */}
+              <div className="absolute inset-x-0 -bottom-4 h-8 bg-gradient-to-b from-transparent to-[#F2EFE9]/20 pointer-events-none" />
+            </div>
             
             {/* The Essentials: Starter System */}
             <StarterSystemHero
-              onSelectProduct={handleSelectProduct}
               onAddToCart={handleAddToCart}
               setCurrentView={changeView}
-            />
-
-            {/* Diagnostic Skin Quiz Section */}
-            <RoutineQuiz
-              onAddToCart={handleAddToCart}
-              onAddMultipleToCart={handleAddMultipleToCart}
-              onSelectProduct={handleSelectProduct}
-              onShowToast={showToast}
-              isEmbedded={true}
             />
 
             {/* High-Contrast Deep Charcoal Clinical Contrast Section */}
@@ -422,20 +430,6 @@ export function App() {
 
       {/* Luxury Editorial Footer */}
       <Footer setCurrentView={changeView} />
-
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductDetailModal
-          product={selectedProduct}
-          onClose={() => setSelectedProductId(null)}
-          onAddToCart={handleAddToCart}
-          onAddMultipleToCart={handleAddMultipleToCart}
-          onToggleWishlist={handleToggleWishlist}
-          onSelectProduct={handleSelectProduct}
-          isWishlisted={wishlistIds.includes(selectedProduct.id)}
-          onShowToast={showToast}
-        />
-      )}
 
       {/* Cart Drawer */}
       <CartDrawer

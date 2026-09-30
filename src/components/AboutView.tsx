@@ -191,9 +191,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ setCurrentView }) => {
         </section>
 
         {/* Formulation Architecture Callout */}
-        <div className="p-8 sm:p-10 bg-[#1A1C1B] text-[#FAF9F7] border border-[#343A33] rounded-[4px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
+        <div className="p-8 sm:p-10 bg-[#1A1C1B] text-[#FAF9F7] border border-[#3E453D] rounded-[4px] flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
           <div className="space-y-1.5 text-left">
-            <span className="text-[10px] font-mono-spec text-[#A9B7B7] uppercase tracking-widest block">
+            <span className="text-[10px] font-mono-spec text-[#8C9B86] uppercase tracking-widest block">
               EVIDENCE-INFORMED DAILY PROTOCOLS
             </span>
             <h2 className="text-xl sm:text-2xl font-serif-editorial text-[#FAF9F7]">
@@ -209,7 +209,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ setCurrentView }) => {
               setCurrentView('shop');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="w-full sm:w-auto px-6 py-3.5 bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-widest font-semibold rounded-[3px] flex items-center justify-center gap-2 transition-colors shrink-0"
+            className="w-full sm:w-auto px-6 py-3.5 bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-widest font-semibold rounded-[3px] flex items-center justify-center gap-2 transition-colors shrink-0 cursor-pointer"
           >
             <span>Explore All Formulations</span>
             <ArrowRight className="w-4 h-4" />

@@ -18,7 +18,7 @@ export const Toast: React.FC<ToastProps> = ({ message, onClose }) => {
         <span className="font-medium">{message}</span>
         <button
           onClick={onClose}
-          className="text-[#A9B7B7] hover:text-[#FAF9F7] p-1 ml-2"
+          className="text-[#8C9B86] hover:text-[#FAF9F7] p-1 ml-2 cursor-pointer"
           aria-label="Dismiss notification"
         >
           <X className="w-3.5 h-3.5" />

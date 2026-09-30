@@ -124,6 +124,7 @@ export const TREATMENTS: Product[] = [
     reviewCount: 312,
     volume: '50 ml / 1.7 fl. oz.',
     phLevel: 'pH 5.5',
+    status: 'best-seller',
     badges: ['ZERO STING', 'RAZOR BURN RELIEF'],
     shortDescription: 'Alcohol-free soothing serum that neutralizes razor burn, stops itching, and accelerates healing of microscopic shaving nicks.',
     whyItExists: 'Traditional aftershaves rely on high-proof alcohol that burns, dehydrates, and damages the healing epidermal barrier. AEGIS AFTER delivers clinical anti-inflammatories like bisabolol and panthenol with zero sting.',

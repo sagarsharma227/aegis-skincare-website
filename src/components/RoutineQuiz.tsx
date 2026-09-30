@@ -297,13 +297,13 @@ export const RoutineQuiz: React.FC<RoutineQuizProps> = ({
               {/* Bulk Add Banner */}
               <div className="p-6 bg-[#1A1C1B] text-[#FAF9F7] border border-[#3E453D] rounded-[4px] flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="space-y-0.5 text-left">
-                  <span className="text-[9px] font-mono-spec text-[#A9B7B7] uppercase tracking-widest block">
+                  <span className="text-[9px] font-mono-spec text-[#8C9B86] uppercase tracking-widest block">
                     COMPLETE RECOMMENDED SYSTEM
                   </span>
                   <div className="text-lg font-serif-editorial text-[#FAF9F7]">
                     Complete Routine Protocol · ₹{finalPrice.toLocaleString('en-IN')}{' '}
                     {discountAmount > 0 && (
-                      <span className="text-xs text-[#A9B7B7] line-through font-mono-spec font-normal">₹{totalPrice.toLocaleString('en-IN')}</span>
+                      <span className="text-xs text-[#8C9B86] line-through font-mono-spec font-normal">₹{totalPrice.toLocaleString('en-IN')}</span>
                     )}
                   </div>
                 </div>
@@ -313,7 +313,7 @@ export const RoutineQuiz: React.FC<RoutineQuizProps> = ({
                     onAddMultipleToCart(recommendedProducts);
                     onShowToast('Recommended routine added to bag with routine savings.');
                   }}
-                  className="w-full sm:w-auto px-6 py-3 bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-widest font-semibold rounded-[3px] flex items-center justify-center gap-2 transition-colors"
+                  className="w-full sm:w-auto px-6 py-3 bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-widest font-semibold rounded-[3px] flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>Add Complete Routine to Bag</span>

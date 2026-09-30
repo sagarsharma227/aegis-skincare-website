@@ -23,6 +23,7 @@ import {
 import { AegisMonogram } from "./AegisMonogram";
 import { ProductPackagingView } from "./ProductPackagingView";
 import { useImageStore } from "../hooks/useImageStore";
+import { AegisImage } from "./AegisImage";
 
 interface ProductDetailModalProps {
   product: Product;
@@ -163,16 +164,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
 
               {/* Main Visual Display Area */}
-              <div className="aspect-square bg-[#151714] rounded-[3px] p-0 flex items-center justify-center border border-[#E2DDD5] relative overflow-hidden group/img">
-                <div className="w-full h-full relative">
-                  <img
-                    src={image}
-                    alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.02]"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.jpg'; }}
-                  />
-                </div>
+              <div className="aspect-square bg-[#EAE5DD] rounded-[3px] p-0 flex items-center justify-center border border-[#E2DDD5] relative overflow-hidden group/img">
+                <AegisImage
+                  src={image}
+                  alt={product.name}
+                  priority={true}
+                  containerClassName="w-full h-full"
+                  className="transition-transform duration-500 group-hover/img:scale-[1.02]"
+                  fallbackSrc={
+                    product.id === 'aegis-after'
+                      ? 'https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=800&q=80'
+                      : product.id === 'aegis-starter-bundle'
+                      ? 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80'
+                      : `/${product.id}.jpg`
+                  }
+                />
               </div>
 
               <div className="space-y-1">

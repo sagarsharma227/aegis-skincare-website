@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
 
-const FALLBACK_IMAGE = '/images/products/aegis-wash.jpg';
+export const resolveProductImage = (id: string, defaultImage?: string): string => {
+  if (id) {
+    return `/${id}.jpg`;
+  }
+  return defaultImage || '/aegis-wash.jpg';
+};
 
 export const useImageStore = (id: string, defaultImage: string) => {
-  const [image, setImage] = useState(defaultImage || FALLBACK_IMAGE);
+  const [image, setImage] = useState(() => resolveProductImage(id, defaultImage));
 
   useEffect(() => {
-    setImage(defaultImage || FALLBACK_IMAGE);
+    setImage(resolveProductImage(id, defaultImage));
   }, [id, defaultImage]);
 
-  const setCustomImage = (dataUrl: string) => {
-    // Legacy stub - custom image uploads are disabled in favor of permanent local assets.
+  const setCustomImage = (_dataUrl: string) => {
     console.log("Custom images disabled. Using permanent asset system.");
   };
 

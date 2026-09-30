@@ -5,7 +5,7 @@ import { ProductCard } from './ProductCard';
 import { RecentlyViewed } from './RecentlyViewed';
 import { ProductComparisonModal } from './ProductComparisonModal';
 import { ShopFilters } from './ShopFilters';
-import { ArrowUpDown, X, Search, RotateCcw, Layers } from 'lucide-react';
+import { ArrowUpDown, X, RotateCcw, Layers } from 'lucide-react';
 import { AegisMonogram } from './AegisMonogram';
 import { motion } from 'motion/react';
 
@@ -27,8 +27,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all');
   const [selectedConcern, setSelectedConcern] = useState<SkinConcern>('all');
   const [selectedSkinType, setSelectedSkinType] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState<'featured' | 'bestsellers' | 'price-low' | 'price-high' | 'rating'>('featured');
+  const [sortBy, setSortBy] = useState<'featured' | 'bestsellers' | 'price-low' | 'price-high'>('featured');
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [isCompareOpen, setIsCompareOpen] = useState(false);
 
@@ -92,24 +91,24 @@ export const ShopView: React.FC<ShopViewProps> = ({
         selectedSkinType === 'all' ||
         (p.skinTypes && p.skinTypes.some((t) => t.toLowerCase().includes(selectedSkinType.toLowerCase())));
 
-      const matchSearch =
-        !searchQuery.trim() ||
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.formulaSpec.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.shortDescription.toLowerCase().includes(searchQuery.toLowerCase());
-
-      return matchCat && matchCon && matchSkin && matchSearch;
+      return matchCat && matchCon && matchSkin;
     });
 
     if (sortBy === 'price-low') {
       result.sort((a, b) => a.price - b.price);
     } else if (sortBy === 'price-high') {
       result.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'rating') {
-      result.sort((a, b) => b.rating - a.rating);
     } else if (sortBy === 'bestsellers') {
-      result.sort((a, b) => b.reviewCount - a.reviewCount);
+      result.sort((a, b) => {
+        const isBestSeller = (p: Product) => {
+          if (p.id === 'aegis-even-routine') return false;
+          return p.status === 'best-seller' || p.id === 'aegis-repair' || p.id === 'aegis-starter-bundle' || p.id === 'aegis-after' || p.badges?.includes('MOST POPULAR');
+        };
+        const aBest = isBestSeller(a) ? 1 : 0;
+        const bBest = isBestSeller(b) ? 1 : 0;
+        if (aBest !== bBest) return bBest - aBest;
+        return b.reviewCount - a.reviewCount;
+      });
     } else if (sortBy === 'featured') {
       // Sort bundles first, then by step sequence based on original array index or category
       result.sort((a, b) => {
@@ -120,7 +119,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
     }
 
     return result;
-  }, [selectedCategory, selectedConcern, selectedSkinType, searchQuery, sortBy]);
+  }, [selectedCategory, selectedConcern, selectedSkinType, sortBy]);
 
   return (
     <div className="bg-[#F2EFE9] min-h-screen py-12 lg:py-20 text-left">
@@ -152,38 +151,19 @@ export const ShopView: React.FC<ShopViewProps> = ({
             setSelectedCategory('all');
             setSelectedConcern('all');
             setSelectedSkinType('all');
-            setSearchQuery('');
           }}
         />
 
-        {/* Toolbar: Search, Formulation Count, and Sorting */}
-        <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-4 sm:p-5 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 shadow-xs">
-          {/* Search Bar */}
-          <div className="relative w-full md:w-80">
-            <Search className="w-4 h-4 text-[#5E645F] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              id="shop-search-input"
-              type="text"
-              placeholder="Search formula, active, concern..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] pl-9 pr-8 py-2 text-xs text-[#1A1C1B] placeholder-[#5E645F]/70 focus:outline-hidden focus:border-[#526442] font-mono-spec"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#5E645F] hover:text-[#1A1C1B] cursor-pointer"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
-
-          {/* Results Count, Reset, Compare Trigger & Sort Controls */}
-          <div className="flex flex-wrap items-center justify-between md:justify-end gap-4 text-xs font-mono-spec">
+        {/* Toolbar: Formulation Count, Compare, and Sorting */}
+        <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 shadow-xs">
+          <div className="text-xs font-mono-spec">
             <span className="font-semibold text-[#1A1C1B]">
               Showing {filteredProducts.length} {filteredProducts.length === 1 ? 'Formulation' : 'Formulations'}
             </span>
+          </div>
+
+          {/* Compare Trigger & Sort Controls */}
+          <div className="flex flex-wrap items-center gap-4 text-xs font-mono-spec">
 
             {/* Compare Bar Trigger */}
             {compareIds.length > 0 && (
@@ -210,7 +190,6 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 <option value="bestsellers">Best Sellers</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
-                <option value="rating">Top Rated</option>
               </select>
             </div>
           </div>
@@ -283,14 +262,14 @@ export const ShopView: React.FC<ShopViewProps> = ({
         {compareIds.length > 0 && (
           <aside aria-label="Product comparison bar" className="fixed bottom-6 right-6 z-40 bg-[#1A1C1B] text-[#FAF9F7] border border-[#3E453D] rounded-[4px] p-4 shadow-2xl flex items-center gap-4 animate-in fade-in slide-in-from-bottom-4">
             <div className="space-y-0.5 text-left">
-              <span className="text-[9px] font-mono-spec text-[#A9B7B7] uppercase tracking-widest block">
+              <span className="text-[9px] font-mono-spec text-[#8C9B86] uppercase tracking-widest block">
                 COMPARE MATRIX ({compareIds.length}/3)
               </span>
               <div className="flex gap-2">
                 {comparedProducts.map((p) => (
                   <span key={p.id} className="text-xs font-serif-editorial text-[#FAF9F7] flex items-center gap-1">
                     {p.name}
-                    <button onClick={() => toggleCompare(p.id)} className="text-[#A9B7B7] hover:text-[#FAF9F7]">
+                    <button onClick={() => toggleCompare(p.id)} className="text-[#8C9B86] hover:text-[#FAF9F7] cursor-pointer">
                       <X className="w-3 h-3" />
                     </button>
                   </span>
@@ -301,7 +280,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
             <button
               id="open-compare-modal-btn"
               onClick={() => setIsCompareOpen(true)}
-              className="py-2 px-4 bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-wider font-semibold rounded-[3px] transition-colors"
+              className="py-2 px-4 bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7] text-xs font-mono-spec uppercase tracking-wider font-semibold rounded-[3px] transition-colors cursor-pointer"
             >
               Compare
             </button>

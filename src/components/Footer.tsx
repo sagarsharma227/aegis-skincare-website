@@ -21,22 +21,22 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentView }) => {
           </div>
           
           <div className="space-y-4">
-            <h3 className="font-mono-spec text-xs tracking-widest text-[#A8B5CF] uppercase font-bold">
+            <h3 className="font-mono-spec text-xs tracking-widest text-[#8C9B86] uppercase font-bold">
               SHOP
             </h3>
             <ul className="space-y-3 font-sans text-xs text-[#E2DDD5] font-light">
               <li>
-                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   All Products
                 </button>
               </li>
               <li>
-                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Bestsellers
                 </button>
               </li>
               <li>
-                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Bundles
                 </button>
               </li>
@@ -44,27 +44,27 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentView }) => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-mono-spec text-xs tracking-widest text-[#A8B5CF] uppercase font-bold">
+            <h3 className="font-mono-spec text-xs tracking-widest text-[#8C9B86] uppercase font-bold">
               EXPLORE
             </h3>
             <ul className="space-y-3 font-sans text-xs text-[#E2DDD5] font-light">
               <li>
-                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('shop'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Shop Skincare
                 </button>
               </li>
               <li>
-                <button onClick={() => { setCurrentView('routines'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('routines'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Routines
                 </button>
               </li>
               <li>
-                <button onClick={() => { setCurrentView('science'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('science'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Science
                 </button>
               </li>
               <li>
-                <button onClick={() => { setCurrentView('journal'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors">
+                <button onClick={() => { setCurrentView('journal'); window.scrollTo(0,0); }} className="hover:text-[#FAF9F7] transition-colors cursor-pointer">
                   Journal
                 </button>
               </li>
@@ -72,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ setCurrentView }) => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="font-mono-spec text-xs tracking-widest text-[#A8B5CF] uppercase font-bold">
+            <h3 className="font-mono-spec text-xs tracking-widest text-[#8C9B86] uppercase font-bold">
               SUPPORT
             </h3>
             <ul className="space-y-3 font-sans text-xs text-[#E2DDD5] font-light">

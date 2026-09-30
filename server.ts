@@ -9,6 +9,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json({ limit: "50mb" }));
+app.use(express.static(path.join(process.cwd(), "public")));
 
 // API health endpoint for Cloud Run container health checks
 app.get("/api/health", (_req, res) => {

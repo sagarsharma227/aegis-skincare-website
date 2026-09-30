@@ -176,7 +176,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
   return (
     <section
       id="aegis-home-faq"
-      className="py-20 lg:py-24 border-b border-[#E2DDD5] bg-[#FAF9F7] text-left relative overflow-hidden"
+      className="py-20 lg:py-24 border-y border-[#262927] bg-[#040404] text-left relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Header Section */}
@@ -188,14 +188,14 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6"
         >
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 text-[10px] font-mono-spec tracking-[0.2em] uppercase text-[#526442] font-bold">
+            <div className="inline-flex items-center gap-2 text-[10px] font-mono-spec tracking-[0.2em] uppercase text-[#8C9B86] font-bold">
               <HelpCircle className="w-3.5 h-3.5" />
               <span>FAQ · CLINICAL ANSWERS</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-editorial font-normal text-[#1A1C1B] leading-[1.15] tracking-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif-editorial font-normal text-[#FAF9F7] leading-[1.15] tracking-tight">
               FAQ
             </h2>
-            <p className="text-sm sm:text-base text-[#5E645F] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#9EA59F] leading-relaxed">
               Straightforward, dermatologically grounded clarifications on male dermal architecture, ingredient concentrations, layering mechanics, and shave recovery.
             </p>
           </div>
@@ -206,9 +206,9 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
               <button
                 id="faq-action-journal"
                 onClick={() => setCurrentView('journal')}
-                className="px-4 py-2.5 bg-[#F2EFE9] hover:bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] text-[#1A1C1B] font-medium inline-flex items-center gap-2 transition-colors"
+                className="px-4 py-2.5 bg-[#141615] hover:bg-[#1C1F1D] border border-[#262927] rounded-[3px] text-[#FAF9F7] font-medium inline-flex items-center gap-2 transition-colors cursor-pointer"
               >
-                <BookOpen className="w-3.5 h-3.5 text-[#526442]" />
+                <BookOpen className="w-3.5 h-3.5 text-[#8C9B86]" />
                 <span>Read The Journal</span>
               </button>
             )}
@@ -216,9 +216,9 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
               <button
                 id="faq-action-quiz"
                 onClick={() => setCurrentView('quiz')}
-                className="px-4 py-2.5 bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] rounded-[3px] font-semibold inline-flex items-center gap-2 transition-colors shadow-xs"
+                className="px-4 py-2.5 bg-[#526442] hover:bg-[#3E4C32] text-[#FAF9F7] rounded-[3px] font-semibold inline-flex items-center gap-2 transition-colors shadow-xs cursor-pointer"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#F2EFE9]" />
+                <Sparkles className="w-3.5 h-3.5 text-[#E2DDD5]" />
                 <span>Diagnostic Quiz</span>
               </button>
             )}
@@ -226,7 +226,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
         </motion.div>
 
         {/* Filter and Search Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#E2DDD5]">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-[#262927]">
           {/* Category Tabs */}
           <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
             {categories.map((cat) => (
@@ -234,10 +234,10 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                 key={cat.id}
                 id={`faq-cat-${cat.id}`}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-[3px] text-xs font-mono-spec uppercase tracking-wider transition-all whitespace-nowrap ${
+                className={`px-3.5 py-1.5 rounded-[3px] text-xs font-mono-spec uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-[#1A1C1B] text-[#FAF9F7] font-semibold'
-                    : 'bg-[#F2EFE9] hover:bg-[#F2EFE9] text-[#5E645F] border border-[#E2DDD5]'
+                    ? 'bg-[#526442] text-[#FAF9F7] font-semibold border border-[#526442]'
+                    : 'bg-[#141615] hover:bg-[#1C1F1D] text-[#9EA59F] hover:text-[#FAF9F7] border border-[#262927]'
                 }`}
               >
                 {cat.label}
@@ -247,19 +247,19 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
 
           {/* Search Input */}
           <div className="relative w-full md:w-72">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#7A8279]" />
+            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#727974]" />
             <input
               id="faq-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search active, routine, or step..."
-              className="w-full pl-9 pr-3 py-2 bg-[#F2EFE9] border border-[#E2DDD5] rounded-[3px] text-xs text-[#1A1C1B] placeholder-[#7A8279] focus:outline-none focus:border-[#526442] transition-colors"
+              className="w-full pl-9 pr-3 py-2 bg-[#141615] border border-[#262927] rounded-[3px] text-xs text-[#FAF9F7] placeholder-[#727974] focus:outline-none focus:border-[#526442] transition-colors font-mono-spec"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-[#7A8279] hover:text-[#1A1C1B]"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-[#8C9B86] hover:text-[#FAF9F7] cursor-pointer"
               >
                 Clear
               </button>
@@ -270,12 +270,12 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
         {/* FAQ Accordion List */}
         <div className="space-y-4">
           {filteredFaqs.length === 0 ? (
-            <div className="py-12 px-6 text-center border border-dashed border-[#E2DDD5] rounded-[4px] bg-[#F2EFE9] space-y-3">
-              <HelpCircle className="w-8 h-8 text-[#7A8279] mx-auto opacity-75" />
-              <p className="text-sm font-serif-editorial text-[#1A1C1B]">
+            <div className="py-12 px-6 text-center border border-dashed border-[#262927] rounded-[4px] bg-[#141615] space-y-3">
+              <HelpCircle className="w-8 h-8 text-[#8C9B86] mx-auto opacity-75" />
+              <p className="text-sm font-serif-editorial text-[#FAF9F7]">
                 No matching inquiries found for "{searchQuery}".
               </p>
-              <p className="text-xs text-[#5E645F]">
+              <p className="text-xs text-[#9EA59F]">
                 Try adjusting your search terms or select "ALL QUESTIONS".
               </p>
               <button
@@ -283,7 +283,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                   setSearchQuery('');
                   setSelectedCategory('all');
                 }}
-                className="text-xs font-mono-spec text-[#526442] font-bold uppercase underline underline-offset-4 hover:text-[#1A1C1B]"
+                className="text-xs font-mono-spec text-[#8C9B86] font-bold uppercase underline underline-offset-4 hover:text-[#FAF9F7] cursor-pointer"
               >
                 Reset Filters
               </button>
@@ -302,8 +302,8 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                   transition={{ duration: 0.7, delay: (index % 5) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   className={`border transition-all duration-200 rounded-[3px] overflow-hidden ${
                     isOpen
-                      ? 'border-[#526442] bg-[#FAF8F3] shadow-xs'
-                      : 'border-[#E2DDD5] bg-[#F2EFE9] hover:border-[#A9A090]'
+                      ? 'border-[#526442] bg-[#141615] shadow-[0_4px_24px_rgba(0,0,0,0.5)]'
+                      : 'border-[#262927] bg-[#101211] hover:bg-[#141615] hover:border-[#526442]/60'
                   }`}
                 >
                   <button
@@ -313,16 +313,16 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                     className="w-full px-5 sm:px-6 py-5 flex items-start justify-between gap-4 text-left cursor-pointer"
                   >
                     <div className="space-y-1.5 flex-1 pr-2">
-                      <div className="flex items-center gap-2 text-[10px] font-mono-spec uppercase text-[#526442] font-bold tracking-wider">
+                      <div className="flex items-center gap-2 text-[10px] font-mono-spec uppercase text-[#8C9B86] font-bold tracking-wider">
                         <span>{faq.categoryLabel}</span>
-                        <span className="text-[#E2DDD5]">·</span>
-                        <span className="text-[#7A8279]">Q{String(index + 1).padStart(2, '0')}</span>
+                        <span className="text-[#434B45]">·</span>
+                        <span className="text-[#8C9B86]/70">Q{String(index + 1).padStart(2, '0')}</span>
                       </div>
-                      <h3 className="text-base sm:text-lg font-serif-editorial text-[#1A1C1B] font-normal leading-snug">
+                      <h3 className="text-base sm:text-lg font-serif-editorial text-[#FAF9F7] font-normal leading-snug">
                         {faq.question}
                       </h3>
                       {!isOpen && (
-                        <p className="text-xs text-[#5E645F] pt-0.5 leading-relaxed">
+                        <p className="text-xs text-[#9EA59F] pt-0.5 leading-relaxed">
                           {faq.shortAnswer}
                         </p>
                       )}
@@ -331,7 +331,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                       className={`p-1.5 rounded-[2px] transition-transform duration-200 mt-1 shrink-0 ${
                         isOpen
                           ? 'rotate-180 bg-[#526442] text-[#FAF9F7]'
-                          : 'bg-[#F2EFE9] text-[#5E645F]'
+                          : 'bg-[#1C1F1D] text-[#9EA59F]'
                       }`}
                     >
                       <ChevronDown className="w-4 h-4" />
@@ -339,26 +339,26 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-[#F2EFE9] space-y-4">
+                    <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-[#262927] space-y-4">
                       {/* Short Takeaway Banner */}
-                      <div className="p-3 bg-[#ECE7DC] border-l-2 border-[#526442] text-xs text-[#1A1C1B] font-medium leading-relaxed">
-                        <strong className="font-mono-spec uppercase text-[10px] text-[#526442] block mb-0.5">
+                      <div className="p-3 bg-[#0C0E0D] border-l-2 border-[#526442] text-xs text-[#E0E5E0] font-medium leading-relaxed">
+                        <strong className="font-mono-spec uppercase text-[10px] text-[#8C9B86] block mb-0.5">
                           Clinical Key Takeaway
                         </strong>
                         {faq.shortAnswer}
                       </div>
 
                       {/* Detailed Clinical Explanation */}
-                      <div className="space-y-3 text-xs sm:text-sm text-[#5E645F] leading-relaxed">
+                      <div className="space-y-3 text-xs sm:text-sm text-[#B4BAB4] leading-relaxed">
                         {faq.detailedAnswer.map((para, pIdx) => (
                           <p key={pIdx}>{para}</p>
                         ))}
                       </div>
 
                       {/* Protocol Tip & Relevant Actives */}
-                      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#F2EFE9] text-xs font-mono-spec">
+                      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#262927] text-xs font-mono-spec">
                         {faq.protocolTip && (
-                          <div className="text-[#526442] flex items-start gap-1.5">
+                          <div className="text-[#8C9B86] flex items-start gap-1.5">
                             <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                             <span className="text-[11px] leading-tight">
                               <strong>Clinical Protocol:</strong> {faq.protocolTip}
@@ -368,11 +368,11 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
 
                         {faq.keyActives && faq.keyActives.length > 0 && (
                           <div className="flex flex-wrap items-center gap-1.5 shrink-0">
-                            <span className="text-[10px] text-[#7A8279] uppercase">Related Actives:</span>
+                            <span className="text-[10px] text-[#8C9B86] uppercase">Related Actives:</span>
                             {faq.keyActives.map((active) => (
                               <span
                                 key={active}
-                                className="px-2 py-0.5 bg-[#F2EFE9] text-[#1A1C1B] rounded-[2px] text-[10px]"
+                                className="px-2 py-0.5 bg-[#1C1F1D] border border-[#262927] text-[#D8DED8] rounded-[2px] text-[10px]"
                               >
                                 {active}
                               </span>

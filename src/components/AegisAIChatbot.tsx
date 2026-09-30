@@ -164,7 +164,7 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
               <span className="block text-xs font-mono-spec tracking-wider font-semibold uppercase text-[#FAF9F7]">
                 AEGIS AI
               </span>
-              <span className="block text-[9px] text-[#A9B7B7] font-mono-spec">
+              <span className="block text-[9px] text-[#8C9B86] font-mono-spec">
                 Skincare Guide
               </span>
             </div>
@@ -181,7 +181,7 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
           className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-32px)] sm:w-[420px] h-[580px] max-h-[85vh] bg-[#FAF9F7] border border-[#E2DDD5] rounded-lg shadow-2xl flex flex-col overflow-hidden text-left"
         >
           {/* Header */}
-          <div className="px-4 py-3.5 bg-[#1A1C1B] text-[#FAF9F7] flex items-center justify-between border-b border-[#343A33]">
+          <div className="px-4 py-3.5 bg-[#1A1C1B] text-[#FAF9F7] flex items-center justify-between border-b border-[#3E453D]">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#526442] flex items-center justify-center text-[#FAF9F7] shadow-xs">
                 <AegisMonogram size={16} color="#FAF9F7" />
@@ -193,7 +193,7 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
                   </span>
                   <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" title="Online" />
                 </div>
-                <p className="text-[10px] font-mono-spec text-[#A9B7B7] tracking-wider">
+                <p className="text-[10px] font-mono-spec text-[#8C9B86] tracking-wider">
                   Your skincare guide.
                 </p>
               </div>
@@ -202,7 +202,7 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
             <div className="flex items-center gap-1">
               <button
                 onClick={handleClearChat}
-                className="p-1.5 text-[#A9B7B7] hover:text-[#FAF9F7] rounded transition-colors"
+                className="p-1.5 text-[#8C9B86] hover:text-[#FAF9F7] rounded transition-colors cursor-pointer"
                 title="Reset conversation"
                 aria-label="Clear chat"
               >
@@ -211,7 +211,7 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
               <button
                 id="aegis-ai-close-btn"
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 text-[#A9B7B7] hover:text-[#FAF9F7] rounded transition-colors"
+                className="p-1.5 text-[#8C9B86] hover:text-[#FAF9F7] rounded transition-colors cursor-pointer"
                 title="Close chat"
                 aria-label="Close chat window"
               >
@@ -279,25 +279,14 @@ export const AegisAIChatbot: React.FC<AegisAIChatbotProps> = ({
                               </span>
                             </div>
 
-                            <div className="flex flex-col gap-1 shrink-0">
-                              <button
-                                onClick={() => {
-                                  onSelectProduct(product.id);
-                                  setIsOpen(false);
-                                }}
-                                className="px-2 py-1 bg-transparent hover:bg-[#F2EFE9] text-[#1A1C1B] border border-[#E2DDD5] text-[9px] font-mono-spec rounded uppercase tracking-wider flex items-center gap-1"
-                                title="Inspect formula"
-                              >
-                                <span>Inspect</span>
-                                <ExternalLink className="w-2.5 h-2.5" />
-                              </button>
+                            <div className="flex items-center shrink-0">
                               <button
                                 onClick={() => onAddToCart(product, 1)}
-                                className="px-2 py-1 bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] text-[9px] font-mono-spec rounded uppercase tracking-wider flex items-center gap-1"
+                                className="px-3 py-1.5 bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7] text-[10px] font-mono-spec rounded-[2px] uppercase tracking-wider flex items-center gap-1.5 cursor-pointer transition-colors shadow-xs"
                                 title="Add to Bag"
                               >
-                                <ShoppingBag className="w-2.5 h-2.5" />
-                                <span>Add</span>
+                                <ShoppingBag className="w-3 h-3" />
+                                <span>Add to Bag</span>
                               </button>
                             </div>
                           </div>

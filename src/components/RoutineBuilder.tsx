@@ -297,13 +297,13 @@ export const RoutineBuilder: React.FC<RoutineBuilderProps> = ({
 
       {/* Routine Check Box & Summary Bar */}
       <div className="bg-[#1A1C1B] text-[#FAF9F7] border border-[#3E453D] rounded-[4px] p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#343A33]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#3E453D]">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono-spec text-[#A9B7B7] font-bold uppercase tracking-widest">
+              <span className="text-[10px] font-mono-spec text-[#8C9B86] font-bold uppercase tracking-widest">
                 ROUTINE COMPLETENESS CHECK
               </span>
-              <span className="px-2 py-0.5 rounded-[2px] bg-[#343A33] text-[#FAF9F7] font-mono-spec text-[10px]">
+              <span className="px-2 py-0.5 rounded-[2px] bg-[#222523] text-[#FAF9F7] font-mono-spec text-[10px] border border-[#3E453D]">
                 {routineScore}% Complete
               </span>
             </div>
@@ -322,7 +322,7 @@ export const RoutineBuilder: React.FC<RoutineBuilderProps> = ({
               <div className="text-lg font-bold text-[#FAF9F7]">
                 ₹{finalPrice.toLocaleString('en-IN')}{' '}
                 {bundleDiscount > 0 && (
-                  <span className="text-xs text-[#A9B7B7] line-through">₹{totalPrice.toLocaleString('en-IN')}</span>
+                  <span className="text-xs text-[#8C9B86] line-through">₹{totalPrice.toLocaleString('en-IN')}</span>
                 )}
               </div>
             </div>
@@ -331,7 +331,7 @@ export const RoutineBuilder: React.FC<RoutineBuilderProps> = ({
               id="builder-add-full-routine-btn"
               onClick={handleAddFullRoutine}
               disabled={selectedProducts.length === 0}
-              className="py-3 px-6 rounded-[3px] bg-[#526442] hover:bg-[#394536] text-[#FAF9F7] font-mono-spec text-xs uppercase tracking-widest font-semibold transition-colors flex items-center gap-2 disabled:opacity-50"
+              className="py-3 px-6 rounded-[3px] bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7] font-mono-spec text-xs uppercase tracking-widest font-semibold transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
               <span>Add System to Bag</span>
@@ -341,40 +341,40 @@ export const RoutineBuilder: React.FC<RoutineBuilderProps> = ({
 
         {/* 4 Check Pillars */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className={`p-3 rounded-[3px] border ${hasCleanser ? 'bg-[#282C27] border-[#526442]' : 'bg-[#282C27]/40 border-[#3E453D]'}`}>
+          <div className={`p-3 rounded-[3px] border ${hasCleanser ? 'bg-[#222523] border-[#526442]' : 'bg-[#222523]/40 border-[#3E453D]'}`}>
             <div className="flex items-center justify-between font-mono-spec text-[10px] mb-1">
-              <span className="text-[#A9B7B7]">01. CLEANSING</span>
-              {hasCleanser ? <Check className="w-3.5 h-3.5 text-[#A9B7B7]" /> : <span className="text-[#A65F5F]">-</span>}
+              <span className="text-[#8C9B86]">01. CLEANSING</span>
+              {hasCleanser ? <Check className="w-3.5 h-3.5 text-[#8C9B86]" /> : <span className="text-[#A65F5F]">-</span>}
             </div>
             <span className="text-xs text-[#FAF9F7] font-medium block">
               {hasCleanser ? 'pH 5.5 Protected' : 'Missing Cleanser'}
             </span>
           </div>
 
-          <div className={`p-3 rounded-[3px] border ${hasTreatment ? 'bg-[#282C27] border-[#526442]' : 'bg-[#282C27]/40 border-[#3E453D]'}`}>
+          <div className={`p-3 rounded-[3px] border ${hasTreatment ? 'bg-[#222523] border-[#526442]' : 'bg-[#222523]/40 border-[#3E453D]'}`}>
             <div className="flex items-center justify-between font-mono-spec text-[10px] mb-1">
-              <span className="text-[#A9B7B7]">02. TREATMENT</span>
-              {hasTreatment ? <Check className="w-3.5 h-3.5 text-[#A9B7B7]" /> : <span className="text-[#A65F5F]">-</span>}
+              <span className="text-[#8C9B86]">02. TREATMENT</span>
+              {hasTreatment ? <Check className="w-3.5 h-3.5 text-[#8C9B86]" /> : <span className="text-[#A65F5F]">-</span>}
             </div>
             <span className="text-xs text-[#FAF9F7] font-medium block">
               {hasTreatment ? '2% BHA + Niacinamide' : 'No Pore Active'}
             </span>
           </div>
 
-          <div className={`p-3 rounded-[3px] border ${hasBarrier ? 'bg-[#282C27] border-[#526442]' : 'bg-[#282C27]/40 border-[#3E453D]'}`}>
+          <div className={`p-3 rounded-[3px] border ${hasBarrier ? 'bg-[#222523] border-[#526442]' : 'bg-[#222523]/40 border-[#3E453D]'}`}>
             <div className="flex items-center justify-between font-mono-spec text-[10px] mb-1">
-              <span className="text-[#A9B7B7]">03. BARRIER</span>
-              {hasBarrier ? <Check className="w-3.5 h-3.5 text-[#A9B7B7]" /> : <span className="text-[#A65F5F]">-</span>}
+              <span className="text-[#8C9B86]">03. BARRIER</span>
+              {hasBarrier ? <Check className="w-3.5 h-3.5 text-[#8C9B86]" /> : <span className="text-[#A65F5F]">-</span>}
             </div>
             <span className="text-xs text-[#FAF9F7] font-medium block">
               {hasBarrier ? '3:1:1 Ceramides' : 'Missing Repair Fluid'}
             </span>
           </div>
 
-          <div className={`p-3 rounded-[3px] border ${hasSpf ? 'bg-[#282C27] border-[#526442]' : 'bg-[#282C27]/40 border-[#3E453D]'}`}>
+          <div className={`p-3 rounded-[3px] border ${hasSpf ? 'bg-[#222523] border-[#526442]' : 'bg-[#222523]/40 border-[#3E453D]'}`}>
             <div className="flex items-center justify-between font-mono-spec text-[10px] mb-1">
-              <span className="text-[#A9B7B7]">04. SUN DEFENSE</span>
-              {hasSpf ? <Check className="w-3.5 h-3.5 text-[#A9B7B7]" /> : <span className="text-[#A65F5F]">-</span>}
+              <span className="text-[#8C9B86]">04. SUN DEFENSE</span>
+              {hasSpf ? <Check className="w-3.5 h-3.5 text-[#8C9B86]" /> : <span className="text-[#A65F5F]">-</span>}
             </div>
             <span className="text-xs text-[#FAF9F7] font-medium block">
               {hasSpf ? 'Zero-Cast SPF 50' : 'Missing Sunscreen'}

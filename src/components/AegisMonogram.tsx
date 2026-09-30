@@ -11,7 +11,7 @@ export const AegisMonogram: React.FC<AegisMonogramProps> = ({
   className = 'w-6 h-6',
   size = 24,
   color = 'currentColor',
-  accentColor = '#A9B7B7'
+  accentColor = '#526442'
 }) => {
   return (
     <svg

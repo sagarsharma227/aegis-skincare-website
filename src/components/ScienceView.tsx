@@ -54,7 +54,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Oil Imbalance</strong>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#A8B5CF]" />
+                <ArrowRight className="w-4 h-4 text-[#5E645F]" />
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">MECHANISM</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Excess Sebum</strong>
@@ -92,7 +92,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Barrier Damage</strong>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#A8B5CF]" />
+                <ArrowRight className="w-4 h-4 text-[#5E645F]" />
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">MECHANISM</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Lipid Depletion</strong>
@@ -130,7 +130,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Razor Irritation</strong>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#A8B5CF]" />
+                <ArrowRight className="w-4 h-4 text-[#5E645F]" />
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">MECHANISM</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Micro-trauma</strong>
@@ -168,7 +168,7 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">CONCERN</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">UV Damage</strong>
                 </div>
-                <ArrowRight className="w-4 h-4 text-[#A8B5CF]" />
+                <ArrowRight className="w-4 h-4 text-[#5E645F]" />
                 <div className="flex-1 space-y-1">
                   <span className="text-[9px] font-mono-spec text-[#5E645F] uppercase tracking-wider block">MECHANISM</span>
                   <strong className="text-sm font-serif-editorial text-[#1A1C1B] block">Photoaging</strong>
@@ -268,8 +268,8 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
           </div>
 
           {/* 05 3:1:1 Ceramide Architecture */}
-          <div className="bg-[#1A1C1B] text-[#FAF9F7] border border-[#343A33] rounded-[4px] p-6 sm:p-10 space-y-6">
-            <div className="flex items-center gap-2 text-[10px] font-mono-spec text-[#A9B7B7] font-bold uppercase tracking-widest">
+          <div className="bg-[#1A1C1B] text-[#FAF9F7] border border-[#3E453D] rounded-[4px] p-6 sm:p-10 space-y-6">
+            <div className="flex items-center gap-2 text-[10px] font-mono-spec text-[#8C9B86] font-bold uppercase tracking-widest">
               <Dna className="w-3.5 h-3.5" />
               <span>05 / BIOMIMETIC RATIO</span>
             </div>
@@ -280,15 +280,15 @@ export const ScienceView: React.FC<ScienceViewProps> = ({ setCurrentView }) => {
               AEGIS barrier formulations utilize a biomimetic lipid approach inspired by the physiological composition of the human stratum corneum:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-              <div className="p-4 bg-[#282C27] border border-[#3E453D] rounded-[3px] space-y-1">
+              <div className="p-4 bg-[#222523] border border-[#3E453D] rounded-[3px] space-y-1">
                 <span className="text-xl font-serif-editorial text-[#FAF9F7] block">3 Parts Ceramides</span>
                 <p className="text-[11px] text-[#E2DDD5]">Ceramide NP, AP, and EOP replenish the cellular lipid mortar.</p>
               </div>
-              <div className="p-4 bg-[#282C27] border border-[#3E453D] rounded-[3px] space-y-1">
+              <div className="p-4 bg-[#222523] border border-[#3E453D] rounded-[3px] space-y-1">
                 <span className="text-xl font-serif-editorial text-[#FAF9F7] block">1 Part Cholesterol</span>
                 <p className="text-[11px] text-[#E2DDD5]">Maintains membrane fluidity and intercellular organization.</p>
               </div>
-              <div className="p-4 bg-[#282C27] border border-[#3E453D] rounded-[3px] space-y-1">
+              <div className="p-4 bg-[#222523] border border-[#3E453D] rounded-[3px] space-y-1">
                 <span className="text-xl font-serif-editorial text-[#FAF9F7] block">1 Part Free Fatty Acids</span>
                 <p className="text-[11px] text-[#E2DDD5]">Provides essential elasticity and flexible barrier protection.</p>
               </div>

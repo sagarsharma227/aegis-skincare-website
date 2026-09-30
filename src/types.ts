@@ -103,6 +103,7 @@ export interface Product {
   reviewCount: number;
   volume: string;
   phLevel: string;
+  status?: 'low-stock' | 'best-seller' | 'limited-edition' | 'archival-batch';
   badges?: string[];
   shortDescription: string;
   whyItExists: string;

@@ -1,23 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { NavView, Product } from '../types';
 import { HeroCanvas } from './HeroCanvas';
 import { ArrowRight, Sparkles, ShieldCheck, Star, Check, ShoppingBag } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { useImageStore } from '../hooks/useImageStore';
+import { AegisImage } from './AegisImage';
 
 interface HeroProps {
   setCurrentView: (view: NavView) => void;
-  onSelectProduct: (productId: string) => void;
+  onSelectProduct?: (productId: string) => void;
   onAddToCart?: (product: Product, quantity?: number) => void;
 }
 
+const showcaseContainerVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1],
+      staggerChildren: 0.09,
+      delayChildren: 0.12
+    }
+  }
+};
+
+const showcaseItemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1]
+    }
+  }
+};
+
 export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onAddToCart }) => {
+  const sectionRef = useRef<HTMLElement>(null);
   const afterProduct = PRODUCTS.find((p) => p.id === 'aegis-after') || PRODUCTS.find((p) => p.name.includes('AFTER')) || PRODUCTS[0];
   const [isAdded, setIsAdded] = useState(false);
 
+  // Parallax scroll effect for hero depth
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 36]);
+
   const displayedProduct = afterProduct;
-  const { image: heroImage } = useImageStore(displayedProduct.id, displayedProduct.image);
+  const { image: storedHeroImage } = useImageStore(displayedProduct.id, displayedProduct.image);
+  const heroImage = storedHeroImage || '/aegis-after.jpg';
 
   const handleQuickAdd = () => {
     if (onAddToCart) {
@@ -28,7 +64,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
   };
 
   return (
-    <section id="aegis-hero" className="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden border-b border-[#E2DDD5]">
+    <section ref={sectionRef} id="aegis-hero" className="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden border-b border-[#E2DDD5]">
       {/* Background Interactive WebGL/Canvas Particle Mesh */}
       <HeroCanvas />
 
@@ -131,11 +167,12 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
             </motion.div>
           </motion.div>
 
-          {/* Right Campaign Interactive Hero Formulation Spotlight */}
+          {/* Right Campaign Interactive Hero Formulation Spotlight - AEGIS AFTER with Staggered Viewport Entrance */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.15 }}
+            variants={showcaseContainerVariants}
             className="lg:col-span-5"
           >
             <div className="relative group">
@@ -147,7 +184,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
               >
                 
                 {/* Header with Star Rating and Inventory Context Badge */}
-                <div className="flex items-center justify-between text-[11px] font-mono-spec pb-3 border-b border-[#E2DDD5]">
+                <motion.div variants={showcaseItemVariants} className="flex items-center justify-between text-[11px] font-mono-spec pb-3 border-b border-[#E2DDD5]">
                   <div className="flex items-center gap-1.5 text-[#526442] font-bold tracking-wider uppercase">
                     <Star className="w-3.5 h-3.5 fill-[#526442]" />
                     <span>5.0 (312 CLINICAL REVIEWS)</span>
@@ -160,37 +197,26 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                       Hero Formula
                     </span>
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Product Image Area - Clicking opens modal */}
-                <div 
+                {/* Product Image Area with Subtle Parallax Effect */}
+                <motion.div 
+                  variants={showcaseItemVariants}
                   id="hero-featured-product"
-                  onClick={() => onSelectProduct(displayedProduct.id)}
-                  className="cursor-pointer aspect-4/3 bg-[#151714] rounded-[3px] overflow-hidden flex items-center justify-center border border-[#E2DDD5] transition-transform duration-300 group-hover:scale-[1.01] relative group/img"
-                  title={`Click to view ${displayedProduct.name} dossier`}
+                  className="aspect-4/3 bg-[#EAE5DD] rounded-[3px] overflow-hidden flex items-center justify-center border border-[#E2DDD5] relative group/img"
                 >
-                  <AnimatePresence mode="wait">
-                    <motion.div 
-                      key={displayedProduct.id}
-                      initial={{ opacity: 0, scale: 0.98 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 1.02 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full h-full relative"
-                    >
-                      <img 
-                        src={heroImage} 
-                        alt={displayedProduct.name} 
-                        className="w-full h-full object-cover"
-                        referrerPolicy="no-referrer"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.jpg'; }}
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
+                  <AegisImage
+                    src={heroImage}
+                    alt={displayedProduct.name}
+                    priority={true}
+                    containerClassName="w-full h-full"
+                    className="scale-105"
+                    fallbackSrc="https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&w=800&q=80"
+                  />
+                </motion.div>
 
                 {/* Product Copy and Pricing */}
-                <div className="space-y-1.5 text-left">
+                <motion.div variants={showcaseItemVariants} className="space-y-1.5 text-left">
                   <div className="flex items-baseline justify-between gap-2">
                     <div>
                       <span className="text-[10px] font-mono-spec uppercase text-[#526442] font-bold block tracking-wider">
@@ -224,10 +250,10 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                   <p className="text-xs text-[#5E645F] leading-relaxed line-clamp-2">
                     100% alcohol-free soothing serum that instantly extinguishes razor burn, seals microscopic nicks, and eliminates post-shave redness with zero sting.
                   </p>
-                </div>
+                </motion.div>
 
                 {/* Single Add to Bag Action Button */}
-                <div className="pt-1">
+                <motion.div variants={showcaseItemVariants} className="pt-1">
                   <motion.button 
                     id="hero-quick-add-btn"
                     whileTap={{ scale: 0.98 }}
@@ -235,12 +261,12 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                     className={`w-full py-3.5 rounded-[3px] font-mono-spec text-xs uppercase tracking-wider font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer ${
                       isAdded 
                         ? 'bg-[#1A1C1B] text-[#FAF9F7]' 
-                        : 'bg-[#526442] hover:bg-[#394536] text-[#FAF9F7]'
+                        : 'bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7]'
                     }`}
                   >
                     {isAdded ? (
                       <>
-                        <Check className="w-4 h-4 text-[#A9B7B7]" />
+                        <Check className="w-4 h-4 text-[#8C9B86]" />
                         <span>ADDED {displayedProduct.name} TO BAG</span>
                       </>
                     ) : (
@@ -250,7 +276,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                       </>
                     )}
                   </motion.button>
-                </div>
+                </motion.div>
               </motion.div>
 
               {/* Floating Architectural Badge */}
@@ -259,7 +285,7 @@ export const Hero: React.FC<HeroProps> = ({ setCurrentView, onSelectProduct, onA
                 transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
                 className="absolute -bottom-3 -right-3 hidden sm:flex items-center gap-2 bg-[#1A1C1B] text-[#FAF9F7] px-3.5 py-1.5 rounded-[2px] text-[10px] font-mono-spec shadow-md border border-[#3E453D]"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#A9B7B7]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#8C9B86]" />
                 <span>CLINICAL EFFICACY · DERMATOLOGIST FORMULATED</span>
               </motion.div>
             </div>

@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Product } from "../types";
 import { Heart, Star, Plus, Check } from "lucide-react";
 import { useImageStore } from "../hooks/useImageStore";
+import { AegisImage } from "./AegisImage";
 import { motion } from "motion/react";
 
 interface ProductCardProps {
   product: Product;
-  onSelectProduct: (productId: string) => void;
+  onSelectProduct?: (productId: string) => void;
   onAddToCart: (product: Product) => void;
   onToggleWishlist: (productId: string) => void;
   isWishlisted: boolean;
@@ -14,7 +15,6 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
-  onSelectProduct,
   onAddToCart,
   onToggleWishlist,
   isWishlisted,
@@ -23,16 +23,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const { image } = useImageStore(product.id, product.image);
   const [isJustAdded, setIsJustAdded] = useState(false);
 
-  // Only keep Limited Edition for exactly 5 specific products
-  const limitedEditionIds = [
-    'aegis-starter-bundle',
-    'aegis-even-routine',
-    'aegis-oil-control-set',
-    'aegis-repair',
-    'aegis-shield-matte'
-  ];
-  
-  const isLimited = limitedEditionIds.includes(product.id);
+  // Check if this product is Bundle 3 (AEGIS EVEN ROUTINE), which must never show any badge
+  const isBundle3 = product.id === 'aegis-even-routine' || product.stepNumber?.includes('BUNDLE / 03');
+
+  // Fallback status for products that previously had limited edition badges
+  const computedStatus = product.status || (
+    product.id === 'aegis-repair' ? 'best-seller' :
+    product.id === 'aegis-shield-matte' ? 'low-stock' :
+    product.id === 'aegis-oil-control-set' ? 'low-stock' :
+    undefined
+  );
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -44,10 +44,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <motion.div
       id={`product-card-${product.id}`}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      onClick={() => onSelectProduct(product.id)}
-      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-colors duration-300 hover:border-[#526442] hover:shadow-lg cursor-pointer select-none"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-colors duration-300 hover:border-[#526442] hover:shadow-md select-none"
     >
       {/* Top Meta, Inventory Badge & Wishlist */}
       <div className="space-y-4">
@@ -56,13 +56,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             <span className="text-[#526442] font-bold tracking-widest uppercase">
               {product.stepNumber}
             </span>
-            {/* Subtle Inventory Context Badge */}
-            {isLimited && (
-              <span className="inline-flex items-center gap-1 text-[9px] font-mono-spec uppercase tracking-wider font-semibold px-2 py-0.5 rounded-[2px] bg-[#EFE9DF] text-[#7A5826] border border-[#DDD0BC]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#A87B32]" />
-                Limited Edition
+            {/* Subtle Inventory & Urgency Badges - Bundle 3 explicitly excluded */}
+            {!isBundle3 && computedStatus === 'low-stock' ? (
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-mono-spec uppercase tracking-wider font-semibold px-2 py-0.5 rounded-[2px] bg-[#F9EDE6] text-[#B84E33] border border-[#ECD1C7]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#B84E33] animate-pulse" />
+                Low Stock
               </span>
-            )}
+            ) : !isBundle3 && computedStatus === 'best-seller' ? (
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-mono-spec uppercase tracking-wider font-semibold px-2 py-0.5 rounded-[2px] bg-[#EBF0E6] text-[#445636] border border-[#CCD7C3]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#526442]" />
+                Best Seller
+              </span>
+            ) : null}
           </div>
 
           <div className="flex items-center gap-1.5">
@@ -90,27 +95,27 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Product Imagery - Authentic Real Photography */}
+        {/* Product Imagery - Authentic Real Photography with Fast Instant Loading */}
         <div
           id={`product-card-img-${product.id}`}
-          className="relative aspect-square bg-[#151714] rounded-[2px] overflow-hidden flex items-center justify-center border border-[#E2DDD5]/40 group/img"
+          className="relative aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden flex items-center justify-center border border-[#E2DDD5]/40 group/img"
         >
-          <img
+          <AegisImage
             src={image}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            referrerPolicy="no-referrer"
-            onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/images/placeholder-product.jpg'; }}
-          />
-
-          {/* Overlay actual product label in HTML to maintain brand consistency over real photography */}
-          <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none">
-            <div className="flex justify-between items-end opacity-90">
-              <span className="text-[10px] font-mono-spec font-bold tracking-[0.1em] text-white/90">
-                AEGIS // {specCode}
-              </span>
+            containerClassName="w-full h-full"
+            className="w-full h-full object-cover"
+            fallbackSrc={`/${product.id}.jpg`}
+          >
+            {/* Overlay actual product label in HTML to maintain brand consistency */}
+            <div className="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none z-20">
+              <div className="flex justify-between items-end opacity-90">
+                <span className="text-[10px] font-mono-spec font-bold tracking-[0.1em] text-white/90">
+                  AEGIS // {specCode}
+                </span>
+              </div>
             </div>
-          </div>
+          </AegisImage>
         </div>
 
         {/* Product Details */}
@@ -170,12 +175,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className={`px-3.5 sm:px-4 py-2 rounded-[3px] font-mono-spec text-[11px] uppercase tracking-wider font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
               isJustAdded
                 ? "bg-[#1A1C1B] text-[#FAF9F7]"
-                : "bg-[#526442] hover:bg-[#394536] text-[#FAF9F7]"
+                : "bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7]"
             }`}
           >
             {isJustAdded ? (
               <>
-                <Check className="w-3.5 h-3.5 text-[#A8D5BA]" />
+                <Check className="w-3.5 h-3.5 text-[#8C9B86]" />
                 <span>Added</span>
               </>
             ) : (

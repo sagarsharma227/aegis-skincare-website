@@ -23,12 +23,12 @@ export const ProductPackagingView: React.FC<ProductPackagingViewProps> = ({
   if (size === "xs" || size === "sm") {
     return (
       <div
-        className={`relative w-full h-full bg-[#151714] overflow-hidden group/thumb ${className}`}
+        className={`relative w-full h-full bg-[#1A1C1B] overflow-hidden group/thumb ${className}`}
       >
         <img
           src={image}
           alt={product.name}
-          className="w-full h-full object-cover grayscale-[0.2]"
+          className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-x-0 bottom-0 p-1.5 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end">
@@ -50,7 +50,7 @@ export const ProductPackagingView: React.FC<ProductPackagingViewProps> = ({
 
   return (
     <div
-      className={`relative w-full ${containerHeight} bg-[#151714] rounded-[3px] overflow-hidden flex flex-col justify-end select-none border border-[#526442]/40 shadow-inner group ${className}`}
+      className={`relative w-full ${containerHeight} bg-[#1A1C1B] rounded-[3px] overflow-hidden flex flex-col justify-end select-none border border-[#3E453D] shadow-inner group ${className}`}
     >
       {/* Actual Photographic Image */}
       <img

@@ -1,22 +1,48 @@
 @import "tailwindcss";
 
+@theme {
+  --color-olive: #526442;
+  --color-olive-hover: #3E453D;
+  --color-olive-muted: #8C9B86;
+
+  --color-cream: #F2EFE9;
+  --color-cream-canvas: #F2EFE9;
+  --color-cream-surface: #FAF9F7;
+  --color-cream-border: #E2DDD5;
+  --color-cream-container: #EAE5DD;
+
+  --color-charcoal: #1A1C1B;
+  --color-charcoal-surface: #222523;
+  --color-charcoal-border: #3E453D;
+  --color-charcoal-muted: #5E645F;
+
+  --color-clay: #9A806C;
+  --color-sage: #8C9B86;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
 @layer base {
   :root {
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-mono: 'JetBrains Mono', monospace;
 
-    /* Warm Mineral Palette */
-    --color-bg-primary: #F2EFE9;       /* Warm Mineral */
+    /* Canonical Single Source of Truth Color Palette */
+    --color-bg-primary: #F2EFE9;       /* Warm Mineral Canvas */
     --color-bg-secondary: #F2EFE9;     /* Soft Limestone */
-    --color-surface: #FAF9F7;          /* Warm Ivory Card */
+    --color-surface: #FAF9F7;          /* Warm Ivory Card Surface */
     --color-text-primary: #1A1C1B;     /* Deep Charcoal */
     --color-text-muted: #5E645F;       /* Muted Charcoal */
-    --color-accent-olive: #526442;     /* Deep Olive */
+    --color-accent-olive: #526442;     /* Deep Olive Primary */
     --color-accent-clay: #9A806C;      /* Muted Clay */
-    --color-accent-mineral: #A9B7B7;   /* Mineral Blue Grey */
+    --color-accent-mineral: #8C9B86;   /* Botanical Sage Tone */
     --color-border: #E2DDD5;           /* Soft Stone Border */
-    --color-dark-section: #1A1C1B;     /* Contrast Charcoal */
+    --color-dark-section: #1A1C1B;     /* Deep Charcoal Section */
+    --color-dark-surface: #222523;     /* Dark Card Surface */
+    --color-dark-border: #3E453D;      /* Dark Card Border */
   }
 
   html {
@@ -91,7 +117,7 @@
   transition: all 0.2s ease-in-out;
 }
 .btn-primary-olive:hover {
-  background-color: #394536;
+  background-color: #3E453D;
 }
 
 .btn-secondary-stone {
@@ -101,7 +127,7 @@
   transition: all 0.2s ease-in-out;
 }
 .btn-secondary-stone:hover {
-  background-color: rgba(207, 200, 188, 0.25);
+  background-color: rgba(226, 221, 213, 0.35);
   border-color: #1A1C1B;
 }
 

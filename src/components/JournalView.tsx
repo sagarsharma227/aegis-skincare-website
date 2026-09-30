@@ -98,12 +98,12 @@ const RelatedJournalProductCard: React.FC<{
           className={`w-full py-2.5 rounded-[3px] font-mono-spec text-xs uppercase tracking-wider font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             isAdded
               ? "bg-[#1A1C1B] text-[#FAF9F7]"
-              : "bg-[#526442] hover:bg-[#394536] text-[#FAF9F7]"
+              : "bg-[#526442] hover:bg-[#3E453D] text-[#FAF9F7]"
           }`}
         >
           {isAdded ? (
             <>
-              <Check className="w-3.5 h-3.5 text-[#A9B7B7]" />
+              <Check className="w-3.5 h-3.5 text-[#8C9B86]" />
               <span>ADDED TO BAG</span>
             </>
           ) : (
@@ -113,15 +113,6 @@ const RelatedJournalProductCard: React.FC<{
             </>
           )}
         </button>
-
-        {onSelectProduct && (
-          <button
-            onClick={() => onSelectProduct(product.id)}
-            className="w-full py-2 rounded-[3px] border border-[#E2DDD5] hover:border-[#1A1C1B] text-[#1A1C1B] font-mono-spec text-[11px] uppercase tracking-wider font-medium text-center transition-colors cursor-pointer"
-          >
-            VIEW CLINICAL DOSSIER
-          </button>
-        )}
       </div>
     </div>
   );
@@ -269,7 +260,7 @@ export const JournalView: React.FC<JournalViewProps> = ({
       <div className="bg-[#1A1C1B] text-[#FAF9F7] py-2.5 px-4 text-center border-b border-[#3E453D]">
         <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] font-mono-spec">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#A9B7B7] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8C9B86] animate-pulse" />
             <span className="font-semibold tracking-wider uppercase">
               THE AEGIS JOURNAL OF DERMATOLOGICAL PRECISION
             </span>
@@ -552,7 +543,7 @@ export const JournalView: React.FC<JournalViewProps> = ({
               {/* Personalized Routine Diagnostic Prompt */}
               <div className="p-8 sm:p-10 bg-[#1A1C1B] text-[#FAF9F7] rounded-[4px] border border-[#3E453D] relative overflow-hidden text-left shadow-md">
                 <div className="max-w-2xl space-y-3 relative z-10">
-                  <span className="text-[10px] font-mono-spec uppercase tracking-[0.2em] text-[#A9B7B7] block font-bold">
+                  <span className="text-[10px] font-mono-spec uppercase tracking-[0.2em] text-[#8C9B86] block font-bold">
                     SYSTEM FORMULATION ENGINE
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-serif-editorial text-[#FAF9F7]">
