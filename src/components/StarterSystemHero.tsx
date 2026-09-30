@@ -41,14 +41,18 @@ const SynchronizedStepCard: React.FC<{
   const { image } = useImageStore(item.product.id, item.product.image);
 
   return (
-    <div className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] p-3.5 flex flex-col justify-between text-left shadow-xs transition-all hover:border-[#526442]/60 hover:shadow-sm">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] p-3.5 flex flex-col justify-between text-left shadow-xs transition-colors duration-300 hover:border-[#526442]/70 hover:shadow-md group/card select-none"
+    >
       <div>
-        <div className="aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden relative mb-3 border border-[#E2DDD5]/60">
+        <div className="aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden relative mb-3 border border-[#E2DDD5]/60 group-hover/card:border-[#526442]/40 transition-colors duration-300">
           <AegisImage
             src={image}
             alt={item.product.name}
             containerClassName="w-full h-full"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105"
             fallbackSrc={`/${item.product.id}.jpg`}
           />
           <div className="absolute top-2 left-2 px-2 py-0.5 bg-[#1A1C1B]/90 text-[#FAF9F7] text-[9px] font-mono-spec font-bold rounded-[2px] z-20">
@@ -61,7 +65,7 @@ const SynchronizedStepCard: React.FC<{
             <span>{item.role}</span>
             <span className="text-[#5E645F]">{item.time}</span>
           </div>
-          <h4 className="text-xs sm:text-sm font-serif-editorial text-[#1A1C1B] font-medium leading-tight">
+          <h4 className="text-xs sm:text-sm font-serif-editorial text-[#1A1C1B] font-medium leading-tight group-hover/card:text-[#526442] transition-colors">
             {item.product.name}
           </h4>
           <p className="text-[10px] font-mono-spec text-[#5E645F] line-clamp-1">
@@ -80,7 +84,7 @@ const SynchronizedStepCard: React.FC<{
         <ShoppingBag className="w-3 h-3" />
         <span>Add · ₹{item.product.price.toLocaleString('en-IN')}</span>
       </button>
-    </div>
+    </motion.div>
   );
 };
 
@@ -247,14 +251,18 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
               {/* Central Visual Showcase */}
               <div className="space-y-6 pt-5">
                 {/* Primary Showcase Banner */}
-                <div className="relative aspect-16/9 sm:aspect-21/9 bg-[#EAE5DD] rounded-[3px] overflow-hidden border border-[#E2DDD5] shadow-xs">
+                <motion.div
+                  whileHover={{ scale: 1.01 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative aspect-16/9 sm:aspect-21/9 bg-[#EAE5DD] rounded-[3px] overflow-hidden border border-[#E2DDD5] shadow-xs group/bundle hover:border-[#526442]/60 transition-colors"
+                >
                   <motion.div style={{ y: bannerParallaxY }} className="w-full h-full">
                     <AegisImage
                       src={bundleImg}
                       alt="The Starter System"
                       priority={true}
                       containerClassName="w-full h-full"
-                      className="scale-105 object-cover"
+                      className="scale-105 object-cover transition-transform duration-700 ease-out group-hover/bundle:scale-110"
                       fallbackSrc="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80"
                     >
                       {/* Bottom Info Bar */}
@@ -273,7 +281,7 @@ export const StarterSystemHero: React.FC<StarterSystemHeroProps> = ({
                       </div>
                     </AegisImage>
                   </motion.div>
-                </div>
+                </motion.div>
 
                 {/* Synergistic 3 Formulations Lineup */}
                 <div className="space-y-2.5">

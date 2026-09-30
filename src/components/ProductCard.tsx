@@ -47,7 +47,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-colors duration-300 hover:border-[#526442] hover:shadow-md select-none"
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#526442]/70 hover:shadow-md select-none"
     >
       {/* Top Meta, Inventory Badge & Wishlist */}
       <div className="space-y-4">
@@ -95,16 +97,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </div>
         </div>
 
-        {/* Product Imagery - Authentic Real Photography with Fast Instant Loading */}
+        {/* Product Imagery - Authentic Real Photography with Smooth Hover Parallax */}
         <div
           id={`product-card-img-${product.id}`}
-          className="relative aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden flex items-center justify-center border border-[#E2DDD5]/40 group/img"
+          className="relative aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden flex items-center justify-center border border-[#E2DDD5]/60 group-hover:border-[#526442]/40 transition-colors duration-300 group/img"
         >
           <AegisImage
             src={image}
             alt={product.name}
             containerClassName="w-full h-full"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             fallbackSrc={`/${product.id}.jpg`}
           >
             {/* Overlay actual product label in HTML to maintain brand consistency */}

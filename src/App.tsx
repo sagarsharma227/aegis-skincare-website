@@ -41,47 +41,51 @@ export function App() {
     restDelta: 0.001
   });
 
-  // Sync memory images to github (runs once on load)
+  // Sync memory images to server safely (runs once on load)
   useEffect(() => {
     const syncImages = async () => {
       try {
         const images: { id: string, dataUrl: string }[] = [];
         
         const scanStorage = (storage: Storage) => {
-          for (let i = 0; i < storage.length; i++) {
-            const key = storage.key(i);
-            if (!key) continue;
-            const dataUrl = storage.getItem(key);
-            if (dataUrl && (dataUrl.startsWith('data:image') || dataUrl.startsWith('http'))) {
-              let id = '';
-              if (key.startsWith('custom_image_')) {
-                id = key.replace('custom_image_', '').replace(/^aegis_/, 'aegis-').replace(/_/g, '-');
-              } else if (key.startsWith('aegis_') || key.startsWith('aegis-') || key.startsWith('art-')) {
-                id = key.replace(/_/g, '-');
-              }
-              if (id && !images.some(img => img.id === id)) {
-                images.push({ id, dataUrl });
+          try {
+            for (let i = 0; i < storage.length; i++) {
+              const key = storage.key(i);
+              if (!key) continue;
+              const dataUrl = storage.getItem(key);
+              if (dataUrl && (dataUrl.startsWith('data:image') || dataUrl.startsWith('http'))) {
+                let id = '';
+                if (key.startsWith('custom_image_')) {
+                  id = key.replace('custom_image_', '').replace(/^aegis_/, 'aegis-').replace(/_/g, '-');
+                } else if (key.startsWith('aegis_') || key.startsWith('aegis-') || key.startsWith('art-')) {
+                  id = key.replace(/_/g, '-');
+                }
+                if (id && !images.some(img => img.id === id)) {
+                  images.push({ id, dataUrl });
+                }
               }
             }
-          }
+          } catch {}
         };
 
         scanStorage(localStorage);
         scanStorage(sessionStorage);
 
         if (images.length > 0) {
-          console.log(`Syncing ${images.length} memory images to server...`);
           const res = await fetch('/api/sync-images', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ images })
-          });
-          const result = await res.json();
-          console.log('Sync result:', result);
+          }).catch(() => null);
+
+          if (res && res.ok) {
+            const result = await res.json().catch(() => null);
+            if (result) {
+              console.log('Synchronized custom images:', images.length);
+            }
+          }
         }
-      } catch (err) {
-        console.error('Failed to sync memory images:', err);
-      }
+      } catch {}
     };
     
     syncImages();
