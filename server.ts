@@ -120,12 +120,29 @@ app.post("/api/sync-images", express.json({ limit: "50mb" }), async (req, res) =
       const matches = img.dataUrl.match(/^data:image\/([A-Za-z-+\/]+);base64,(.+)$/);
       if (!matches || matches.length !== 3) continue;
       
-      const type = matches[1] === "jpeg" ? "jpg" : matches[1];
       const buffer = Buffer.from(matches[2], "base64");
       const filename = `${img.id}.jpg`;
       
-      await fs.writeFile(path.join(publicPath, filename), buffer);
-      console.log(`Saved ${filename} to public directory`);
+      try {
+        await fs.writeFile(path.join(publicPath, filename), buffer);
+      } catch {}
+
+      try {
+        const prodDir = path.join(publicPath, "images", "products");
+        await fs.writeFile(path.join(prodDir, filename), buffer);
+      } catch {}
+
+      try {
+        const bundleDir = path.join(publicPath, "images", "bundles");
+        await fs.writeFile(path.join(bundleDir, filename), buffer);
+      } catch {}
+
+      try {
+        const journalDir = path.join(publicPath, "images", "journal");
+        await fs.writeFile(path.join(journalDir, filename), buffer);
+      } catch {}
+
+      console.log(`Saved ${filename} across public directories`);
     }
 
     res.json({ success: true, message: "Images synced to public folder" });

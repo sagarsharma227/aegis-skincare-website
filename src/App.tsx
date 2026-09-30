@@ -47,31 +47,27 @@ export function App() {
       try {
         const images: { id: string, dataUrl: string }[] = [];
         
-        // Scan localStorage
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          if (key && key.startsWith('custom_image_')) {
-            const dataUrl = localStorage.getItem(key);
-            if (dataUrl && dataUrl.startsWith('data:image')) {
-              const id = key.replace('custom_image_', '').replace(/^aegis_/, 'aegis-').replace(/_/, '-');
-              images.push({ id, dataUrl });
-            }
-          }
-        }
-        
-        // Scan sessionStorage
-        for (let i = 0; i < sessionStorage.length; i++) {
-          const key = sessionStorage.key(i);
-          if (key && key.startsWith('custom_image_')) {
-            const dataUrl = sessionStorage.getItem(key);
-            if (dataUrl && dataUrl.startsWith('data:image')) {
-              const id = key.replace('custom_image_', '').replace(/^aegis_/, 'aegis-').replace(/_/, '-');
-              if (!images.some(img => img.id === id)) {
+        const scanStorage = (storage: Storage) => {
+          for (let i = 0; i < storage.length; i++) {
+            const key = storage.key(i);
+            if (!key) continue;
+            const dataUrl = storage.getItem(key);
+            if (dataUrl && (dataUrl.startsWith('data:image') || dataUrl.startsWith('http'))) {
+              let id = '';
+              if (key.startsWith('custom_image_')) {
+                id = key.replace('custom_image_', '').replace(/^aegis_/, 'aegis-').replace(/_/g, '-');
+              } else if (key.startsWith('aegis_') || key.startsWith('aegis-') || key.startsWith('art-')) {
+                id = key.replace(/_/g, '-');
+              }
+              if (id && !images.some(img => img.id === id)) {
                 images.push({ id, dataUrl });
               }
             }
           }
-        }
+        };
+
+        scanStorage(localStorage);
+        scanStorage(sessionStorage);
 
         if (images.length > 0) {
           console.log(`Syncing ${images.length} memory images to server...`);
