@@ -88,34 +88,6 @@ const FAQ_ITEMS: FAQItem[] = [
     keyActives: ['Salicylic Acid (BHA)', 'Niacinamide (Vitamin B3)', 'Zinc PCA'],
     protocolTip: 'Suitable for daily AM and PM use. Start 3 times per week if you have reactive or easily flushed skin.'
   },
-  {
-    id: 'faq-3-1-1-ceramide-ratio',
-    category: 'ingredients',
-    categoryLabel: 'ACTIVE INGREDIENTS',
-    question: "What does the '3:1:1 Biomimetic Lipid Ratio' mean and why is it essential?",
-    shortAnswer: 'It replicates the exact equimolar proportion of ceramides, cholesterol, and free fatty acids found in healthy human skin.',
-    detailedAnswer: [
-      'The stratum corneum is structured like "bricks and mortar": protein-rich corneocyte cells (bricks) suspended in a continuous multi-lamellar lipid matrix (mortar).',
-      'Pioneering dermal biochemistry by Dr. Peter Elias demonstrated that this lipid matrix is naturally composed of approximately 50% ceramides, 25% cholesterol, and 15% free fatty acids—an approximate 3:1:1 equimolar ratio.',
-      'When topical formulations provide only isolated ceramides without matching cholesterol and fatty acids, barrier repair is incomplete. Supplying the precise 3:1:1 ratio accelerates barrier reconstitution by up to 300% within 24 hours of barrier disruption.'
-    ],
-    keyActives: ['Ceramide NP', 'Ceramide AP', 'Ceramide EOP', 'Cholesterol', 'Free Fatty Acids'],
-    protocolTip: 'Found in AEGIS REPAIR, AEGIS RECOVER, and AEGIS CALM for deep stratum corneum healing.'
-  },
-  {
-    id: 'faq-formulation-standards',
-    category: 'ingredients',
-    categoryLabel: 'ACTIVE INGREDIENTS',
-    question: 'Are AEGIS formulations free from fragrances, drying alcohols, and harsh sulfates?',
-    shortAnswer: '100% yes. We strictly exclude synthetic fragrances, essential oils, denatured ethanol, and SLS.',
-    detailedAnswer: [
-      'Fragrance molecules and volatile essential oils (e.g., lavender, citrus, eucalyptus oils) are the leading cause of cosmetic allergic contact dermatitis in dermatological patch tests.',
-      'All AEGIS products are 100% fragrance-free, dye-free, paraben-free, and formulated without denatured alcohol (alcohol denat / ethanol).',
-      'Our cleansers utilize biomimetic amino-acid surfactant complexes (such as sodium cocoyl glycinate and apple amino acids) strictly buffered to physiological epidermal pH 5.0–5.5 to preserve the skin\'s natural acid mantle.'
-    ],
-    keyActives: ['pH 5.0–5.5 Buffer', 'Apple Amino Acids', '100% Fragrance-Free Matrix'],
-    protocolTip: 'Every batch is third-party dermatologically tested on sensitive and razor-sensitized skin.'
-  },
   // 4. RESULTS & TIMELINES
   {
     id: 'faq-timeline-results',
@@ -144,7 +116,7 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [expandedId, setExpandedId] = useState<string | null>('faq-3-minute-routine');
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'ALL QUESTIONS' },
@@ -338,50 +310,61 @@ export const FrequentlyAskedQuestions: React.FC<FrequentlyAskedQuestionsProps> =
                     </div>
                   </button>
 
-                  {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-[#262927] space-y-4">
-                      {/* Short Takeaway Banner */}
-                      <div className="p-3 bg-[#0C0E0D] border-l-2 border-[#526442] text-xs text-[#E0E5E0] font-medium leading-relaxed">
-                        <strong className="font-mono-spec uppercase text-[10px] text-[#8C9B86] block mb-0.5">
-                          Clinical Key Takeaway
-                        </strong>
-                        {faq.shortAnswer}
-                      </div>
-
-                      {/* Detailed Clinical Explanation */}
-                      <div className="space-y-3 text-xs sm:text-sm text-[#B4BAB4] leading-relaxed">
-                        {faq.detailedAnswer.map((para, pIdx) => (
-                          <p key={pIdx}>{para}</p>
-                        ))}
-                      </div>
-
-                      {/* Protocol Tip & Relevant Actives */}
-                      <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#262927] text-xs font-mono-spec">
-                        {faq.protocolTip && (
-                          <div className="text-[#8C9B86] flex items-start gap-1.5">
-                            <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                            <span className="text-[11px] leading-tight">
-                              <strong>Clinical Protocol:</strong> {faq.protocolTip}
-                            </span>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        id={`faq-answer-${faq.id}`}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 sm:px-6 pb-6 pt-2 border-t border-[#262927] space-y-4">
+                          {/* Short Takeaway Banner */}
+                          <div className="p-3 bg-[#0C0E0D] border-l-2 border-[#526442] text-xs text-[#E0E5E0] font-medium leading-relaxed">
+                            <strong className="font-mono-spec uppercase text-[10px] text-[#8C9B86] block mb-0.5">
+                              Clinical Key Takeaway
+                            </strong>
+                            {faq.shortAnswer}
                           </div>
-                        )}
 
-                        {faq.keyActives && faq.keyActives.length > 0 && (
-                          <div className="flex flex-wrap items-center gap-1.5 shrink-0">
-                            <span className="text-[10px] text-[#8C9B86] uppercase">Related Actives:</span>
-                            {faq.keyActives.map((active) => (
-                              <span
-                                key={active}
-                                className="px-2 py-0.5 bg-[#1C1F1D] border border-[#262927] text-[#D8DED8] rounded-[2px] text-[10px]"
-                              >
-                                {active}
-                              </span>
+                          {/* Detailed Clinical Explanation */}
+                          <div className="space-y-3 text-xs sm:text-sm text-[#B4BAB4] leading-relaxed">
+                            {faq.detailedAnswer.map((para, pIdx) => (
+                              <p key={pIdx}>{para}</p>
                             ))}
                           </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+
+                          {/* Protocol Tip & Relevant Actives */}
+                          <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#262927] text-xs font-mono-spec">
+                            {faq.protocolTip && (
+                              <div className="text-[#8C9B86] flex items-start gap-1.5">
+                                <ShieldCheck className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                                <span className="text-[11px] leading-tight">
+                                  <strong>Clinical Protocol:</strong> {faq.protocolTip}
+                                </span>
+                              </div>
+                            )}
+
+                            {faq.keyActives && faq.keyActives.length > 0 && (
+                              <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                                <span className="text-[10px] text-[#8C9B86] uppercase">Related Actives:</span>
+                                {faq.keyActives.map((active) => (
+                                  <span
+                                    key={active}
+                                    className="px-2 py-0.5 bg-[#1C1F1D] border border-[#262927] text-[#D8DED8] rounded-[2px] text-[10px]"
+                                  >
+                                    {active}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               );
             })

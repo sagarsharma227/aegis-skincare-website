@@ -43,8 +43,9 @@ const SynchronizedStepCard: React.FC<{
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] p-3.5 flex flex-col justify-between text-left shadow-xs transition-colors duration-300 hover:border-[#526442]/70 hover:shadow-md group/card select-none"
+      className="bg-[#FAF9F7] border border-[#E2DDD5] rounded-[3px] p-3.5 flex flex-col justify-between text-left shadow-xs transition-colors duration-300 hover:border-[#526442]/70 hover:shadow-md group/card select-none active:border-[#526442]"
     >
       <div>
         <div className="aspect-square bg-[#EAE5DD] rounded-[2px] overflow-hidden relative mb-3 border border-[#E2DDD5]/60 group-hover/card:border-[#526442]/40 transition-colors duration-300">

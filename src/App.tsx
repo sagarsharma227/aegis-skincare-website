@@ -26,19 +26,18 @@ import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
 import { AegisAIChatbot } from './components/AegisAIChatbot';
 import { useAssetPreload } from './hooks/useAssetPreload';
-import { Sparkles, ArrowRight, Sun, Moon, Clock, Copy, Check } from 'lucide-react';
-import { motion, useScroll, useSpring } from 'motion/react';
+import { Sparkles, ArrowRight, Sun, Moon, Clock, Copy, Check, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useSpring, useMotionValueEvent } from 'motion/react';
 
 export function App() {
   // Preload critical hero assets and product imagery for seamless flicker-free navigation
   useAssetPreload();
 
-  // Scroll progress for home page
   const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest: number) => {
+    setShowScrollTop(latest > 0.12);
   });
 
   // Sync memory images to server safely (runs once on load)
@@ -297,21 +296,25 @@ export function App() {
   const totalCartCount = cartItems.reduce((acc, i) => acc + i.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-[#F2EFE9] text-[#1A1C1B] font-sans antialiased flex flex-col justify-between selection:bg-[#526442] selection:text-[#FAF9F7]">
-      {/* Thin, Subtle Home Page Scroll Progress Bar */}
-      {currentView === 'home' && (
-        <div
-          id="home-scroll-progress-container"
-          className="fixed top-0 left-0 right-0 h-[2.5px] z-50 pointer-events-none bg-[#E2DDD5]/20"
-          aria-hidden="true"
-        >
-          <motion.div
-            id="home-scroll-progress-bar"
-            style={{ scaleX }}
-            className="h-full bg-[#526442] origin-left shadow-[0_0_8px_rgba(82,100,66,0.35)]"
-          />
-        </div>
-      )}
+    <div className="min-h-screen bg-[#F2EFE9] text-[#1A1C1B] font-sans antialiased flex flex-col justify-between selection:bg-[#526442] selection:text-[#FAF9F7] relative">
+      {/* Mobile-Optimized Quick Scroll-to-Top Floating Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            id="mobile-scroll-to-top-btn"
+            initial={{ opacity: 0, scale: 0.8, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 16 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-6 left-5 sm:left-6 z-40 p-2.5 rounded-full bg-[#FAF9F7]/95 hover:bg-[#FAF9F7] text-[#1A1C1B] border border-[#E2DDD5] shadow-md backdrop-blur-md cursor-pointer flex items-center justify-center hover:scale-105 active:scale-90 transition-transform"
+            aria-label="Scroll to top"
+            title="Scroll to top"
+          >
+            <ChevronUp className="w-4 h-4 text-[#526442]" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Top Announcement Bar */}
       <AnnouncementBar />

@@ -46,10 +46,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       id={`product-card-${product.id}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: true, amount: 0.05 }}
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#526442]/70 hover:shadow-md select-none"
+      className="group h-full flex-1 bg-[#FAF9F7] border border-[#E2DDD5] rounded-[4px] p-4.5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#526442]/70 hover:shadow-md select-none active:border-[#526442]/80"
     >
       {/* Top Meta, Inventory Badge & Wishlist */}
       <div className="space-y-4">

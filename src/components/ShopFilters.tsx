@@ -75,7 +75,8 @@ export const ShopFilters: React.FC<ShopFiltersProps> = ({
               key={item.id}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25, delay: index * 0.02 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ duration: 0.2, delay: index * 0.02 }}
               onClick={() => onSelect(isActive && item.id !== 'all' ? 'all' : item.id)}
               className={`group cursor-pointer p-3 sm:p-4 border rounded-[3px] transition-all text-center flex flex-col items-center justify-center min-h-[75px] sm:min-h-[85px] select-none ${
                 isActive

@@ -131,18 +131,24 @@
   border-color: #1A1C1B;
 }
 
-/* Custom subtle scrollbar */
+/* Custom subtle vertical scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F2EFE9;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #E2DDD5;
-  border-radius: 3px;
+  background: #526442;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #9A806C;
+  background: #3E453D;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #526442 transparent;
 }

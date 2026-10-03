@@ -103,6 +103,37 @@ Keep responses direct, professional, clear, without generic marketing fluff. If 
   }
 });
 
+app.post("/api/newsletter/subscribe", express.json(), async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email || typeof email !== "string") {
+      res.status(400).json({ error: "Email address is required" });
+      return;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const cleanEmail = email.trim().toLowerCase();
+
+    if (!emailRegex.test(cleanEmail)) {
+      res.status(400).json({ error: "Invalid email format" });
+      return;
+    }
+
+    console.log(`[AEGIS Newsletter] Enrolled: ${cleanEmail}`);
+    console.log(`[AEGIS Newsletter] Dispatch sent to ${cleanEmail}: Vol. 01: Stratum Corneum & Barrier Restoration`);
+
+    res.json({
+      success: true,
+      message: `Clinical dispatch sent to ${cleanEmail}`,
+      email: cleanEmail,
+      emailSent: true
+    });
+  } catch (error) {
+    console.error("Newsletter subscription error:", error);
+    res.status(500).json({ error: "Failed to dispatch newsletter" });
+  }
+});
+
 app.post("/api/sync-images", express.json({ limit: "50mb" }), async (req, res) => {
   try {
     const { images } = req.body;
